@@ -93,4 +93,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.middleware.use Rack::Deflater
   config.force_ssl = true
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST", "testapp.com")
+
 end
