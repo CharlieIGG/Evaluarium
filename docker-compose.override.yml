@@ -1,0 +1,103 @@
+version: "3.7"
+
+volumes:
+  app_node_modules: # Used to store the app's node modules...
+
+networks:
+  backend:
+
+services:
+  # The migration processor container - we'll use this as the base for the rest
+  # of the app service definitions:
+  migration: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: icalialabs/testapp:development
+    entrypoint: /usr/src/bin/dev-entrypoint.sh
+    volumes:
+      # Mount the app code into the app containers at the "/usr/src" folder:
+      - .:/usr/src
+
+      # After mounting the app code, this replaces the local 'node_modules'
+      # folder inside the container with a Docker volume. This is done for
+      # several reasons:
+      # - So we can run the frontend app either from the host (i.e. macOS) or
+      #   using containers without having the host & container clobber the npm
+      #   each other's packages, or avoid conflicting versions for macOS / Linux
+      # - Helps when running on macOS/Windows to speed up the npm install from,
+      #   zero, since a local volume bind on mac/win is noticeably slower than
+      #   a Docker volume - and node module install is very susceptible to
+      #   I/O performance
+      - app_node_modules:/usr/src/node_modules
+    networks:
+      - backend
+
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true
+
+    # Link to our postgres and redis services, so they can be visible from our
+    # app service containers:
+    depends_on:
+      - postgres
+      - redis
+
+    # The command we want to execute by default when running the container
+    command: rails db:migrate
+
+    # Specify environment variables available for our app containers. We'll
+    # leave a YML anchor in case we need to override or add more variables if
+    # needed on each app service:
+    environment: &app_environment
+      # We'll set the DATABASE_URL environment variable for the app to connect
+      # to our postgres container - no need to use a 'config/database.yml' file.
+      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/
+
+      # We'll set the RAILS_ENV and RACK_ENV environment variables to
+      # 'development', so our app containers will start in 'development' mode
+      # on this compose project:
+      RAILS_ENV: development
+      RACK_ENV: development
+      RAILS_LOG_TO_STDOUT: "true"
+      MAILER_HOST: localhost
+      MAILER_PORT: 3000
+      LISTEN_USE_POLLING: ${TESTAPP_LISTEN_USE_POLLING:-no}
+      REDIS_URL: redis://redis:6379/1
+
+  web:
+    <<: *app
+    command: rails server -p 3000 -b 0.0.0.0
+    ports:
+      - ${TESTAPP_WEB_PORT:-3000}:3000
+    depends_on:
+      - webpacker
+      - postgres
+      - redis
+
+  # This container autocompiles, serves and live-reloads Webpack assets
+  # (including our ReactJS code) for our development environment. This service
+  # is proxied by the `web` container, so there is no need to publish ports for
+  # it:
+  webpacker:
+    <<: *app
+    ports:
+      - ${TESTAPP_WEBPACKER_DEV_SERVER_PORT:-3035}:3035
+    command: webpack-dev-server
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+      RAILS_ENV: development
+
+  test:
+    <<: *app
+    command: rspec
+    ports:
+      - ${TESTAPP_WEB_PORT:-3001}:3001
+    environment:
+      <<: *app_environment
+      RAILS_ENV: test
+      RACK_ENV: test
