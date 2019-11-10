@@ -19,6 +19,20 @@ Bundler.require(*Rails.groups)
 
 module TESTAPP
   class Application < Rails::Application
+
+    # don't generate RSpec tests for views and helpers
+    config.generators do |generator|
+      generator.test_framework :rspec
+      generator.view_specs false
+      generator.helper_specs false
+      generator.stylesheets false
+      generator.javascripts false
+      generator.helper false
+      generator.request_specs false
+      generator.routing_specs false
+    end
+  
+    config.i18n.enforce_available_locales = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
