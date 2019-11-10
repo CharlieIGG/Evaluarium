@@ -1,6 +1,6 @@
 version: v1.0
 
-name: 'Main Pipeline'
+name: "Main Pipeline"
 
 agent:
   machine:
@@ -31,17 +31,17 @@ blocks:
       jobs:
         - name: Main app
           commands:
-          # Pull the images referenced in the 'cache_from' key:
-          - docker-image-manager download-cache test
+            # Pull the images referenced in the 'cache_from' key:
+            - docker-image-manager download-cache test
 
-          # Build the test image:
-          - ci-compose build --pull test
+            # Build the test image:
+            - ci-compose build --pull test
 
-          # Tag & Push test image so we can use it on later blocks:
-          - docker-image-manager tag-and-push test
+            # Tag & Push test image so we can use it on later blocks:
+            - docker-image-manager tag-and-push test
 
-  - name: "Testapp Tests"
-    dependencies: [ "Build Test Images" ]
+  - name: "Startup Evaluation App Tests"
+    dependencies: ["Build Test Images"]
     task:
       secrets:
         - name: AWS
@@ -88,7 +88,7 @@ blocks:
 
   - name: End-to-End Tests
     dependencies:
-      - "Testapp Tests"
+      - "Startup Evaluation App Tests"
     task:
       jobs:
         # This is just a placeholder we'll have for now:

@@ -61,7 +61,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "TESTAPP_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "STARTUPAPP_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
 
@@ -70,7 +70,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.perform_caching = false
-config.action_mailer.default_url_options = { :host => "testapp.com" }
+config.action_mailer.default_url_options = { :host => "startupapp.com" }
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = false
@@ -78,7 +78,7 @@ config.action_mailer.default :charset => "utf-8"
 config.action_mailer.smtp_settings = {
   :user_name => ENV["SENDGRID_USERNAME"],
   :password => ENV["SENDGRID_PASSWORD"],
-  :domain => "testapp.com",
+  :domain => "startupapp.com",
   :address => "smtp.sendgrid.net",
   :port => 587,
   :authentication => :plain,
@@ -109,6 +109,6 @@ config.action_mailer.smtp_settings = {
   config.active_record.dump_schema_after_migration = false
   config.middleware.use Rack::Deflater
   config.force_ssl = true
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST", "testapp.com")
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST", "startupapp.com")
 
 end

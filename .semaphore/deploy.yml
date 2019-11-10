@@ -1,6 +1,6 @@
 version: v1.0
 
-name: 'Deploy Pipeline'
+name: "Deploy Pipeline"
 
 agent:
   machine:
@@ -26,24 +26,24 @@ blocks:
       jobs:
         - name: Main App
           commands:
-            - export RELEASE_IMAGE_TAG=564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:${GIT_SHORT_SHA:-latest}
+            - export RELEASE_IMAGE_TAG=978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
-            - mkdir -p testapp && cd testapp
-            
+            - mkdir -p startupapp && cd startupapp
+
             # Generate the 'web' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.web
-            
+
             # Generate the 'release' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.release
             - echo 'CMD [ "rails", "release" ]' >> Dockerfile.release
 
             # Push the images to staging:
-            - heroku container:push --recursive --app testapp-staging
+            - heroku container:push --recursive --app startupapp-staging
 
             # Release the images to staging:
-            - heroku container:release web release --app testapp-staging
+            - heroku container:release web release --app startupapp-staging
 
   - name: Production Deploy
     task:
@@ -63,21 +63,21 @@ blocks:
       jobs:
         - name: Main App
           commands:
-            - export RELEASE_IMAGE_TAG=564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:${GIT_SHORT_SHA:-latest}
+            - export RELEASE_IMAGE_TAG=978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
-            - mkdir -p testapp && cd testapp
-            
+            - mkdir -p startupapp && cd startupapp
+
             # Generate the 'web' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.web
-            
+
             # Generate the 'release' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.release
             - echo 'CMD [ "rails", "release" ]' >> Dockerfile.release
 
             # Push the images to production:
-            - heroku container:push --recursive --app testapp-production
+            - heroku container:push --recursive --app startupapp-production
 
             # Release the images to production:
-            - heroku container:release web release --app testapp-production
+            - heroku container:release web release --app startupapp-production

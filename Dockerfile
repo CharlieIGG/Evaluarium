@@ -26,32 +26,32 @@ ENV HOME=/usr/src PATH=/usr/src/bin:$PATH
 
 # Step 6: We'll install curl for later dependencies installations
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    curl
+  apt-get install -y --no-install-recommends \
+  curl
 
 # Step 7: Add nodejs source
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # Step 8: Add yarn packages repository
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 # Step 9: Install the common runtime dependencies:
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    apt-transport-https software-properties-common \
-    ca-certificates \
-    libpq5 \
-    openssl \
-    nodejs \
-    tzdata \
-    yarn && \
-    rm -rf /var/lib/apt/lists/*
+  apt-get install -y --no-install-recommends \
+  apt-transport-https software-properties-common \
+  ca-certificates \
+  libpq5 \
+  openssl \
+  nodejs \
+  tzdata \
+  yarn && \
+  rm -rf /var/lib/apt/lists/*
 
 # Step 10: Add Dockerize image
 RUN export DOCKERIZE_VERSION=v0.6.1 && curl -L \
-    https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    | tar -C /usr/local/bin -xz
+  https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+  | tar -C /usr/local/bin -xz
 
 # II: Development Stage: =======================================================
 # In this stage we'll build the image used for development, including compilers,
@@ -64,14 +64,14 @@ FROM runtime AS development
 # Step 12: Install the development dependency packages with alpine package
 # manager:
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
-    chromium \
-    chromium-driver \
-    git \
-    graphviz \
-    libpq-dev && \
-    rm -rf /var/lib/apt/lists/*
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  chromium \
+  chromium-driver \
+  git \
+  graphviz \
+  libpq-dev && \
+  rm -rf /var/lib/apt/lists/*
 
 # Step 13: Fix npm uid-number error
 # - see https://github.com/npm/uid-number/issues/7
@@ -112,11 +112,11 @@ FROM testing AS builder
 
 # Step 22: Precompile assets:
 RUN export DATABASE_URL=postgres://postgres@example.com:5432/fakedb \
-    SECRET_KEY_BASE=10167c7f7654ed02b3557b05b88ece \
-    RAILS_ENV=production && \
-    rails assets:precompile && \
-    rails webpacker:compile && \
-    rails secret > /dev/null
+  SECRET_KEY_BASE=10167c7f7654ed02b3557b05b88ece \
+  RAILS_ENV=production && \
+  rails assets:precompile && \
+  rails webpacker:compile && \
+  rails secret > /dev/null
 
 # Step 23: Remove installed gems that belong to the development & test groups -
 # we'll copy the remaining system gems into the deployable image on the next
@@ -125,21 +125,21 @@ RUN bundle config without development:test && bundle clean
 
 # Step 24: Remove files not used on release image:
 RUN rm -rf \
-    .rspec \
-    Guardfile \
-    bin/rspec \
-    bin/checkdb \
-    bin/dumpdb \
-    bin/restoredb \
-    bin/setup \
-    bin/spring \
-    bin/update \
-    bin/dev-entrypoint.sh \
-    config/spring.rb \
-    node_modules \
-    spec \
-    config/initializers/listen_patch.rb \
-    tmp/*
+  .rspec \
+  Guardfile \
+  bin/rspec \
+  bin/checkdb \
+  bin/dumpdb \
+  bin/restoredb \
+  bin/setup \
+  bin/spring \
+  bin/update \
+  bin/dev-entrypoint.sh \
+  config/spring.rb \
+  node_modules \
+  spec \
+  config/initializers/listen_patch.rb \
+  tmp/*
 
 # V: Release stage: ============================================================
 # In this stage, we build the final, deployable Docker image, which will be
@@ -160,9 +160,9 @@ ENV RAILS_ENV=production RACK_ENV=production PORT=3000
 
 # Step 29: Generate the temporary directories in case they don't already exist:
 RUN mkdir -p /usr/src/tmp/cache && \
-    mkdir -p /usr/src/tmp/pids && \
-    mkdir -p /usr/src/tmp/sockets && \
-    chown -R nobody /usr/src
+  mkdir -p /usr/src/tmp/pids && \
+  mkdir -p /usr/src/tmp/sockets && \
+  chown -R nobody /usr/src
 
 # Step 30: Set the container user to 'nobody':
 USER nobody
@@ -174,13 +174,13 @@ CMD [ "puma" ]
 ARG SOURCE_BRANCH="master"
 ARG SOURCE_COMMIT="000000"
 ARG BUILD_DATE="2017-09-26T16:13:26Z"
-ARG IMAGE_NAME="testapp:latest"
+ARG IMAGE_NAME="startupapp:latest"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name="Testapp" \
-      org.label-schema.description="testapp" \
-      org.label-schema.vcs-url="https://github.com/IcaliaLabs/testapp.git" \
-      org.label-schema.vcs-ref=$SOURCE_COMMIT \
-      org.label-schema.schema-version="1.0.0-rc1" \
-      build-target="release" \
-      build-branch=$SOURCE_BRANCH
+  org.label-schema.name="Startup Evaluation App" \
+  org.label-schema.description="startupapp" \
+  org.label-schema.vcs-url="https://github.com/charlieigg/startupapp.git" \
+  org.label-schema.vcs-ref=$SOURCE_COMMIT \
+  org.label-schema.schema-version="1.0.0-rc1" \
+  build-target="release" \
+  build-branch=$SOURCE_BRANCH

@@ -1,5 +1,5 @@
 ---
-name: testapp 
+name: startupapp
 
 features:
   - github

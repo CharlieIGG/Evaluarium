@@ -17,7 +17,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module TESTAPP
+module STARTUPAPP
   class Application < Rails::Application
 
     # don't generate RSpec tests for views and helpers
@@ -31,7 +31,7 @@ module TESTAPP
       generator.request_specs false
       generator.routing_specs false
     end
-  
+
     config.i18n.enforce_available_locales = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2

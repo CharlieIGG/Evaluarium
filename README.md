@@ -1,49 +1,49 @@
-# TESTAPP
+# STARTUPAPP
 
 -- PLEASE ADD A DESCRIPTION --
 
 ## Table of contents
 
-* [Client Details](#client-details)
-* [Environment URLS](#environment-urls)
-* [Da Team](#team)
-* [Management resources](#management-resources)
-* [Setup the project](#setup-the-project)
-* [Running the stack for development](#running-the-stack-for-development)
-* [Stop the project](#stop-the-project)
-* [Restoring the database](#restoring-the-database)
-* [Debugging](#debugging)
-* [Running specs](#running-specs)
-* [Contributing](CONTRIBUTING.md)
-* [PR Template](PULL_REQUEST_TEMPLATE.md)
-* [Analyzing code for issues](#analyzing-code)
+- [STARTUPAPP](#startupapp)
+  - [Table of contents](#table-of-contents)
+    - [Client Details](#client-details)
+    - [Environment URLS](#environment-urls)
+    - [Da team](#da-team)
+    - [Management tools](#management-tools)
+  - [Development](#development)
+    - [Setup the project](#setup-the-project)
+    - [Running the stack for Development](#running-the-stack-for-development)
+    - [Stop the project](#stop-the-project)
+    - [Restoring the database](#restoring-the-database)
+    - [Debugging](#debugging)
+    - [Running specs](#running-specs)
+    - [Analyzing code for issues](#analyzing-code-for-issues)
 
 ### Client Details
 
-| Name  | Email | Role | Slack |
-| ------------- | ------------- | ------------- | ------------- |
-| Client name | email@fromclient.com | CEO | @client |
-| Client name | email@fromclient.com | CEO | @client |
-| Client name | email@fromclient.com | CEO | @client |
+| Name        | Email                | Role | Slack   |
+| ----------- | -------------------- | ---- | ------- |
+| Client name | email@fromclient.com | CEO  | @client |
+| Client name | email@fromclient.com | CEO  | @client |
+| Client name | email@fromclient.com | CEO  | @client |
 
 
 ### Environment URLS
 
-* **Production** - [https://TESTAPP-production.herokuapp.com](https://TESTAPP-production.herokuapp.com)
-* **Staging** - [https://TESTAPP-staging.herokuapp.com](https://TESTAPP-staging.herokuapp.com)
+* **Production** - [https://STARTUPAPP-production.herokuapp.com](https://STARTUPAPP-production.herokuapp.com)
+* **Staging** - [https://STARTUPAPP-staging.herokuapp.com](https://STARTUPAPP-staging.herokuapp.com)
 
 ### Da team
 
-| Name  | Email | Role |
-| ------------- | ------------- | ------------- |
-| FirstName LastName | mail@icalialabs.com  | Development |
-| FirstName LastName | mail@icalialabs.com  | Development |
+| Name             | Email                 | Role        |
+| ---------------- | --------------------- | ----------- |
+| Carlos I. Garcia | charlie.igg@gmail.com | Development |
 
 ### Management tools
 
 You should ask for access to this tools if you don't have it already:
 
-* [Github repo](https://github.com/IcaliaLabs/TESTAPP)
+* [Github repo](https://github.com/charlieigg/STARTUPAPP)
 * [Pivotal tracker project](https://www.pivotaltracker.com/)
 * [Client Slack](https://change-me.slack.com/)
 * [Heroku](https://heroku.com)
@@ -66,13 +66,13 @@ After installing please you can follow this simple steps:
 1. Clone this repository into your local machine
 
 ```bash
-$ git clone git@github.com:IcaliaLabs/testapp.git
+$ git clone git@github.com:charlieigg/startupapp.git
 
 ```
 2. Copy the `example.env` file to `.env` in the project's source directory.
 
 ```bash
-$ cd testapp
+$ cd startupapp
 $ cp example.env .env
 ```
 
@@ -117,7 +117,7 @@ docker-compose:
 $ docker-compose up
 ```
 
-That command will lift every service TESTAPP needs, such as the `rails server`, `postgres`, and `redis`.
+That command will lift every service STARTUPAPP needs, such as the `rails server`, `postgres`, and `redis`.
 
 
 It may take a while before you see anything, you can follow the logs of the containers with:
@@ -140,7 +140,7 @@ This means the project is up and running.
 
 ### Stop the project
 
-In order to stop TESTAPP as a whole you can run:
+In order to stop STARTUPAPP as a whole you can run:
 
 ```
 % plis stop
@@ -156,7 +156,7 @@ This will stop every container, but if you need to stop one in particular, you c
 
 ### Restoring the database
 
-You probably won't be working with a blank database, so once you are able to run TESTAPP you can restore the database, to do it, first stop all services:
+You probably won't be working with a blank database, so once you are able to run STARTUPAPP you can restore the database, to do it, first stop all services:
 
 ```
 % plis stop
@@ -171,15 +171,15 @@ Then just lift up the `db` service:
 The next step is to login to the database container:
 
 ```
-% docker exec -ti testapp_db_1 bash
+% docker exec -ti startupapp_db_1 bash
 ```
 
 This will open up a bash session in to the database container.
 
-Up to this point we just need to download a database dump and copy under `TESTAPP/backups/`, this directory is mounted on the container, so you will be able to restore it with:
+Up to this point we just need to download a database dump and copy under `STARTUPAPP/backups/`, this directory is mounted on the container, so you will be able to restore it with:
 
 ```
-root@a3f695b39869:/# bin/restoredb testapp_dev db/backups/<databaseDump>
+root@a3f695b39869:/# bin/restoredb startupapp_dev db/backups/<databaseDump>
 ```
 
 If you want to see how this script works, you can find it under `bin/restoredb`
