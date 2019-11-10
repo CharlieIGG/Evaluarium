@@ -1,6 +1,6 @@
 # STARTUPAPP
 
--- PLEASE ADD A DESCRIPTION --
+Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and other kinds of public and private scenarios for evaluating startups.
 
 ## Table of contents
 
