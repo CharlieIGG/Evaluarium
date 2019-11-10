@@ -32,6 +32,11 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
 
   config.action_mailer.perform_caching = false
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
