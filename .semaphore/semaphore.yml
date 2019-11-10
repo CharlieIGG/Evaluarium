@@ -1,0 +1,105 @@
+version: v1.0
+
+name: 'Main Pipeline'
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: Build Test Images
+    dependencies: []
+    task:
+      secrets:
+        - name: AWS
+      prologue:
+        commands:
+          - checkout
+
+          # Add the scripts for CI to the PATH:
+          - export PATH=$(pwd)/.semaphore/bin:${PATH}
+
+          # Generate the dotenv file:
+          - generate-dotenv-file > .env
+
+          # Alias docker-compose commands as 'ci-compose':
+          - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
+
+          # Log in to AWS ECR:
+          - $(aws ecr get-login --no-include-email --region eu-central-1)
+      jobs:
+        - name: Main app
+          commands:
+          # Pull the images referenced in the 'cache_from' key:
+          - docker-image-manager download-cache test
+
+          # Build the test image:
+          - ci-compose build --pull test
+
+          # Tag & Push test image so we can use it on later blocks:
+          - docker-image-manager tag-and-push test
+
+  - name: "Testapp Tests"
+    dependencies: [ "Build Test Images" ]
+    task:
+      secrets:
+        - name: AWS
+      prologue:
+        commands:
+          - checkout
+
+          # Add the scripts for CI to the PATH:
+          - export PATH=$(pwd)/.semaphore/bin:${PATH}
+
+          # Generate the dotenv file:
+          - generate-dotenv-file > .env
+
+          # Alias docker-compose commands as 'ci-compose':
+          - alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"
+
+          # Log in to AWS ECR:
+          - $(aws ecr get-login --no-include-email --region eu-central-1)
+      jobs:
+        - name: RSpec
+          commands:
+            # Pull the images referenced in the 'cache_from' key:
+            - docker-image-manager download-cache test
+
+            # Build the test image:
+            - ci-compose build --pull test
+
+            # Wait until postgres is ready:
+            - ci-compose run test dockerize -wait tcp://postgres:5432 -timeout 30s
+
+            # Run the tests
+            - ci-compose run test
+
+        - name: Build Release
+          commands:
+            # Prepare the release builder (build the builder!):
+            - docker-image-manager download-cache builder
+            - ci-compose build --pull builder
+            - docker-image-manager tag-and-push builder
+
+            # The builder image should be already present.
+            - ci-compose build --pull release
+            - docker-image-manager tag-and-push release
+
+  - name: End-to-End Tests
+    dependencies:
+      - "Testapp Tests"
+    task:
+      jobs:
+        # This is just a placeholder we'll have for now:
+        - name: E2E Tests
+          commands:
+            - echo "OK"
+
+promotions:
+  - name: Deploy
+    pipeline_file: deploy.yml
+    auto_promote_on:
+      - result: passed
+        branch:
+          - master

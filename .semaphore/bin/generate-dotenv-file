@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status:
+set -e
+
+CONTEXT_DIR=$(pwd)
+
+GIT_SHORT_SHA=${SEMAPHORE_GIT_SHA:0:7}
+BUILD_DATE=$(date +%Y-%m-%dT%H:%M:%S%z)
+TAG_SAFE_BRANCH=$(echo ${SEMAPHORE_GIT_BRANCH} | tr '/' '-')
+
+echo "BUILD_DATE=${BUILD_DATE}"
+echo "GIT_SHA=${SEMAPHORE_GIT_SHA}"
+echo "GIT_SHORT_SHA=${GIT_SHORT_SHA}"
+echo "GIT_BRANCH=${SEMAPHORE_GIT_BRANCH}"
+echo "TAG_SAFE_BRANCH=${TAG_SAFE_BRANCH}"

@@ -1,0 +1,71 @@
+# This Compose file is meant to be used along the project's `docker-compose.yml`
+# file on CI/CD contexts, such as SemaphoreCI or Github Actions.
+#
+# A useful alias to run this on your CI/CD pipelines:
+# `alias ci-compose="docker-compose --file docker-compose.yml --file ci-compose.yml"`
+#
+# See https://docs.docker.com/compose/extends/#understanding-multiple-compose-files
+
+# We'll use the '3.x spec since it supports the 'cache_from'
+# option:
+version: '3.7'
+
+services:
+  test:
+    image: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${GIT_SHORT_SHA:-latest}
+    build: &app_ci_build
+      context: .
+      target: testing
+      cache_from:
+        # The order of this list will be considered by the `docker-image-manager` script!
+        # Also, be sure to include the service image name in this list as well.
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${GIT_SHORT_SHA:-latest} # The resulting image must also be on cache_from!
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing
+    depends_on:
+      - postgres
+    networks:
+      - backend
+    command: rspec
+    environment:
+      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/testapp_test
+      RAILS_ENV: test
+      RACK_ENV: test
+      MAILER_HOST: localhost
+      MAILER_PORT: 3000
+
+  builder:
+    image: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder-${GIT_SHORT_SHA:-latest}
+    build:
+      <<: *app_ci_build
+      target: builder
+      cache_from:
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder-${GIT_SHORT_SHA:-latest}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${GIT_SHORT_SHA:-latest}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing
+
+  release:
+    image: 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:${GIT_SHORT_SHA:-latest}
+    build:
+      <<: *app_ci_build
+      target: release
+      args:
+        SOURCE_BRANCH: ${GIT_BRANCH}
+        SOURCE_COMMIT: ${GIT_SHA}
+        BUILD_DATE: ${BUILD_DATE}
+        IMAGE_NAME: "icalialabs/testapp"
+      cache_from:
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:${GIT_SHORT_SHA:-latest}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder-${GIT_SHORT_SHA:-latest}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${GIT_SHORT_SHA:-latest}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing-${TAG_SAFE_BRANCH}
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:master
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:builder
+        - 564922552600.dkr.ecr.eu-central-1.amazonaws.com/icalialabs/testapp:testing
+
+  
