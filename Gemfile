@@ -19,7 +19,6 @@ gem "rack-mini-profiler", require: false
 
 # CSS frameworks
 gem "normalize-rails"
-gem "alom"
 gem "autoprefixer-rails"
 
 group :development do
