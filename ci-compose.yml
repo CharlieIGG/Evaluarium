@@ -12,16 +12,16 @@ version: "3.7"
 
 services:
   test:
-    image: 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${GIT_SHORT_SHA:-latest}
+    image: ${ECR_URL}:testing-${GIT_SHORT_SHA:-latest}
     build: &app_ci_build
       context: .
       target: testing
       cache_from:
         # The order of this list will be considered by the `docker-image-manager` script!
         # Also, be sure to include the service image name in this list as well.
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${GIT_SHORT_SHA:-latest} # The resulting image must also be on cache_from!
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing
+        - ${ECR_URL}:testing-${GIT_SHORT_SHA:-latest} # The resulting image must also be on cache_from!
+        - ${ECR_URL}:testing-${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:testing
     depends_on:
       - postgres
     networks:
@@ -35,20 +35,20 @@ services:
       MAILER_PORT: 3000
 
   builder:
-    image: 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder-${GIT_SHORT_SHA:-latest}
+    image: ${ECR_URL}:builder-${GIT_SHORT_SHA:-latest}
     build:
       <<: *app_ci_build
       target: builder
       cache_from:
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder-${GIT_SHORT_SHA:-latest}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${GIT_SHORT_SHA:-latest}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder-${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing
+        - ${ECR_URL}:builder-${GIT_SHORT_SHA:-latest}
+        - ${ECR_URL}:testing-${GIT_SHORT_SHA:-latest}
+        - ${ECR_URL}:builder-${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:testing-${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:builder
+        - ${ECR_URL}:testing
 
   release:
-    image: 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
+    image: ${ECR_URL}:${GIT_SHORT_SHA:-latest}
     build:
       <<: *app_ci_build
       target: release
@@ -58,12 +58,12 @@ services:
         BUILD_DATE: ${BUILD_DATE}
         IMAGE_NAME: "charlieigg/startupapp"
       cache_from:
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder-${GIT_SHORT_SHA:-latest}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${GIT_SHORT_SHA:-latest}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder-${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing-${TAG_SAFE_BRANCH}
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:master
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:builder
-        - 978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:testing
+        - ${ECR_URL}:${GIT_SHORT_SHA:-latest}
+        - ${ECR_URL}:builder-${GIT_SHORT_SHA:-latest}
+        - ${ECR_URL}:testing-${GIT_SHORT_SHA:-latest}
+        - ${ECR_URL}:${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:builder-${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:testing-${TAG_SAFE_BRANCH}
+        - ${ECR_URL}:master
+        - ${ECR_URL}:builder
+        - ${ECR_URL}:testing

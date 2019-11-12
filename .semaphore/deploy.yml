@@ -26,7 +26,7 @@ blocks:
       jobs:
         - name: Main App
           commands:
-            - export RELEASE_IMAGE_TAG=978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
+            - export RELEASE_IMAGE_TAG=${ECR_URL}:${GIT_SHORT_SHA:-latest}
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
@@ -63,7 +63,7 @@ blocks:
       jobs:
         - name: Main App
           commands:
-            - export RELEASE_IMAGE_TAG=978175366817.dkr.ecr.us-west-2.amazonaws.com/charlieigg/startupapp:${GIT_SHORT_SHA:-latest}
+            - export RELEASE_IMAGE_TAG=${ECR_URL}:${GIT_SHORT_SHA:-latest}
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
