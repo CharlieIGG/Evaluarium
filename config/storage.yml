@@ -11,7 +11,7 @@ amazon: &amazon_s3
   access_key_id: <%= ENV.fetch('STORAGE_ACCESS_KEY_ID', 'access_key_id') %>
   secret_access_key: <%= ENV.fetch('STORAGE_SECRET_ACCESS_KEY', 'secret_access_key') %>
   region: <%= ENV.fetch('STORAGE_REGION', 'us-east-1') %>
-  bucket: <%= ENV.fetch('STORAGE_BUCKET_NAME', 'testapp') %>
+  bucket: <%= ENV.fetch('STORAGE_BUCKET_NAME', 'startupapp') %>
   <% if ENV.key?('STORAGE_ENDPOINT_URL') %>
   endpoint: <%= ENV.fetch('STORAGE_ENDPOINT_URL') %>
   force_path_style: true
