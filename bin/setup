@@ -56,3 +56,25 @@ fi
 
 
 git config heroku.remote staging
+
+if heroku join --app TESTAPP-staging > /dev/null 2>&1; then
+  git remote add staging git@heroku.com:TESTAPP-staging.git || true
+  printf 'You are a collaborator on the "TESTAPP-staging" Heroku app
+'
+else
+  printf 'Ask for access to the "TESTAPP-staging" Heroku app
+'
+fi
+
+
+if heroku join --app TESTAPP-production > /dev/null 2>&1; then
+  git remote add production git@heroku.com:TESTAPP-production.git || true
+  printf 'You are a collaborator on the "TESTAPP-production" Heroku app
+'
+else
+  printf 'Ask for access to the "TESTAPP-production" Heroku app
+'
+fi
+
+
+git config heroku.remote staging
