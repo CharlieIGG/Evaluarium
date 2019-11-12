@@ -3,6 +3,9 @@ name: startupapp
 
 features:
   - github
-
-
-
+  - login
+  - invitations
+  - pagination
+  - heroku
+  - upload_files
+  - dashkit
