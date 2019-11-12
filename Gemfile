@@ -59,3 +59,4 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise"
+gem "devise_invitable", "~> 1.7.0"
