@@ -34,3 +34,25 @@ chdir APP_ROOT do
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
 end
+
+if heroku join --app STARTUPAPP-staging > /dev/null 2>&1; then
+  git remote add staging git@heroku.com:STARTUPAPP-staging.git || true
+  printf 'You are a collaborator on the "STARTUPAPP-staging" Heroku app
+'
+else
+  printf 'Ask for access to the "STARTUPAPP-staging" Heroku app
+'
+fi
+
+
+if heroku join --app STARTUPAPP-production > /dev/null 2>&1; then
+  git remote add production git@heroku.com:STARTUPAPP-production.git || true
+  printf 'You are a collaborator on the "STARTUPAPP-production" Heroku app
+'
+else
+  printf 'Ask for access to the "STARTUPAPP-production" Heroku app
+'
+fi
+
+
+git config heroku.remote staging

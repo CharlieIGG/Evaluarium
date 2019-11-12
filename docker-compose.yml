@@ -26,7 +26,6 @@ services:
       - backend
     environment:
       POSTGRES_PASSWORD: 3x4mpl3P455w0rd
-
   # Where are the rest of the app services? (i.e. test, worker, web, etc)
   #
   # We've separated the app services from the rest of the services to streamline

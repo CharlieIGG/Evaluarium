@@ -19,7 +19,6 @@ gem "rack-mini-profiler", require: false
 
 # CSS frameworks
 gem "normalize-rails"
-gem "alom"
 gem "autoprefixer-rails"
 
 group :development do
@@ -58,3 +57,9 @@ group :development, :test do
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "devise"
+gem "devise_invitable", "~> 1.7.0"
+gem "kaminari"
+gem "mini_magick"
+gem "aws-sdk-s3", "~> 1.9", require: false

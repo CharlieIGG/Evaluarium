@@ -236,3 +236,9 @@ codeclimate engine:install
 3: Finally, run codeclimate to analyze the code:
 codeclimate analyze
 ```
+## Deploying
+
+If you have previously run the `./bin/setup` script,
+you can deploy to staging and production with:
+    % ./bin/deploy staging
+    % ./bin/deploy production
