@@ -18,3 +18,10 @@ rails db:drop db:create db:migrate
 clear
 rails db:drop db:create db:migrate
 rails db:drop db:create db:migrate
+rails db:migrate
+bundle
+rails db:migrate
+rails db:migrate
+clear
+clear
+rails db:migrate

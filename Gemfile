@@ -6,10 +6,12 @@ gem "rails", "~> 6.0.0"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.11"
 gem "sass-rails", "~> 5"
+gem 'jquery-rails'
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rack-canonical-host"
 gem "webpacker", "~> 4.0"
 gem "redis", '~> 4.0'
+gem 'bootstrap', '~> 4.3.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
