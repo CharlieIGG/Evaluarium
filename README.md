@@ -6,7 +6,6 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
 
 - [STARTUPAPP](#startupapp)
   - [Table of contents](#table-of-contents)
-    - [Client Details](#client-details)
     - [Environment URLS](#environment-urls)
     - [Da team](#da-team)
     - [Management tools](#management-tools)
@@ -18,20 +17,12 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
     - [Debugging](#debugging)
     - [Running specs](#running-specs)
     - [Analyzing code for issues](#analyzing-code-for-issues)
-
-### Client Details
-
-| Name        | Email                | Role | Slack   |
-| ----------- | -------------------- | ---- | ------- |
-| Client name | email@fromclient.com | CEO  | @client |
-| Client name | email@fromclient.com | CEO  | @client |
-| Client name | email@fromclient.com | CEO  | @client |
-
+  - [Deploying](#deploying)
 
 ### Environment URLS
 
-* **Production** - [https://STARTUPAPP-production.herokuapp.com](https://STARTUPAPP-production.herokuapp.com)
-* **Staging** - [https://STARTUPAPP-staging.herokuapp.com](https://STARTUPAPP-staging.herokuapp.com)
+* **Production** - TBD
+* **Staging** - TBD
 
 ### Da team
 
