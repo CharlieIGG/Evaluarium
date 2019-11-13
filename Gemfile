@@ -37,6 +37,7 @@ end
 
 # Test gems
 group :test do
+  gem 'guard-rspec'
   gem "shoulda-matchers"
   # Generate test coverage reports:
   gem "simplecov", "~> 0.16.1", require: false
@@ -62,6 +63,7 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise"
+gem "rolify"
 gem "devise_invitable", "~> 1.7.0"
 gem "kaminari"
 gem "mini_magick"
