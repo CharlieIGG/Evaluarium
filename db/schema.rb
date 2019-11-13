@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_002634) do
+ActiveRecord::Schema.define(version: 2019_11_13_010649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,32 @@ ActiveRecord::Schema.define(version: 2019_11_13_002634) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "evaluation_programs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "project_program_summaries", force: :cascade do |t|
+    t.float "average"
+    t.bigint "evaluation_program_id", null: false
+    t.bigint "project_id", null: false
+    t.date "program_start"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evaluation_program_id"], name: "index_project_program_summaries_on_evaluation_program_id"
+    t.index ["project_id"], name: "index_project_program_summaries_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.date "founded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -79,4 +105,6 @@ ActiveRecord::Schema.define(version: 2019_11_13_002634) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "project_program_summaries", "evaluation_programs"
+  add_foreign_key "project_program_summaries", "projects"
 end
