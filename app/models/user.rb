@@ -1,3 +1,7 @@
+#
+# A person's access to the platform. Users have Roles which give context
+# for what they can do and access
+#
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
