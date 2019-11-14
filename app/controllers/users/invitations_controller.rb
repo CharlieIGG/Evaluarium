@@ -5,8 +5,8 @@ module Users
     private
 
     def invite_resource(&block)
-      user = resource_class.invite!(invite_params, current_inviter, &block)
-      byebug
+      # We will override this method to also assign roles
+      resource_class.invite!(invite_params, current_inviter, &block)
     end
   end
 end
