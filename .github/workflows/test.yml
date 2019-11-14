@@ -5,5 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: run Rspec
+      - name: BUILD TEST
+        run: docker-compose build test
+      - name: MIGRATE TEST
+        run: docker-compose run test rails db:create db:migrate
+      - name: RUN RSPEC
         run: docker-compose run test rspec
