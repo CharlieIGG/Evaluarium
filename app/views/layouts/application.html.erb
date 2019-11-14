@@ -16,6 +16,7 @@
   <body>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application'%>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>
       <script type="text/javascript">
