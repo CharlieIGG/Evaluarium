@@ -8,8 +8,8 @@
 # See https://devcenter.heroku.com/articles/docker-builds-heroku-yml#setup-defining-your-app-s-environment
 setup:
   addons:
-  - plan: heroku-postgresql
-    as: DATABASE
+    - plan: heroku-postgresql
+      as: DATABASE
 
   config: &main_config
     LANG: en_US.UTF-8
@@ -24,6 +24,7 @@ build:
   docker:
     # We'll define the Dockerfile & context for the web process:
     web: Dockerfile
+    worker: Dockerfile
   config:
     <<: *main_config
 
@@ -39,3 +40,4 @@ release:
 # See https://devcenter.heroku.com/articles/docker-builds-heroku-yml#run-defining-the-process-to-run
 run:
   web: puma -t 2:25 -w 1 -e production
+  worker: sidekiq
