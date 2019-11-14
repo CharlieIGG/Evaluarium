@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_010649) do
+ActiveRecord::Schema.define(version: 2019_11_13_232533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,30 @@ ActiveRecord::Schema.define(version: 2019_11_13_010649) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "evaluation_criteria", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "evaluation_programs", force: :cascade do |t|
     t.string "name"
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "program_criteria", force: :cascade do |t|
+    t.bigint "evaluation_program_id", null: false
+    t.bigint "evaluation_criterium_id", null: false
+    t.integer "position"
+    t.float "weight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evaluation_criterium_id"], name: "index_program_criteria_on_evaluation_criterium_id"
+    t.index ["evaluation_program_id"], name: "index_program_criteria_on_evaluation_program_id"
   end
 
   create_table "project_program_summaries", force: :cascade do |t|
@@ -105,6 +123,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_010649) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "program_criteria", "evaluation_criteria"
+  add_foreign_key "program_criteria", "evaluation_programs"
   add_foreign_key "project_program_summaries", "evaluation_programs"
   add_foreign_key "project_program_summaries", "projects"
 end
