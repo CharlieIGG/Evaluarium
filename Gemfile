@@ -23,6 +23,9 @@ gem "rack-mini-profiler", require: false
 gem "normalize-rails"
 gem "autoprefixer-rails"
 
+# Active Jobs
+gem 'sidekiq', '~> 5.2', '>= 5.2.5'
+
 group :development do
   gem "web-console", ">= 3.3.0"
   gem "listen", ">= 3.0.5", "< 3.2"
