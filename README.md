@@ -1,5 +1,7 @@
 # STARTUPAPP
 
+![](https://github.com/CharlieIGG/startupapp/workflows/Tests/badge.svg)
+
 Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and other kinds of public and private scenarios for evaluating startups.
 
 ## Table of contents
