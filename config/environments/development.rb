@@ -62,7 +62,11 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  config.web_console.whitelisted_ips = ['172.16.0.0/12', '192.168.0.0/16']
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.delivery_method = :letter_opener
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+  config.web_console.whitelisted_ips = %w[127.0.0.1 172.0.0.0/8 0.0.0.0/0 172.16.0.0/12 192.168.0.0/16]
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

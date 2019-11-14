@@ -36,6 +36,8 @@ group :development do
   gem "annotate"
   gem "rack-timeout", require:"rack/timeout/base"
   gem "rails-erd"
+  gem "letter_opener"
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 # Test gems
@@ -75,3 +77,6 @@ gem "aws-sdk-s3", "~> 1.9", require: false
 
 # Model instance decoration
 gem 'draper'
+
+# Dynamically add nested_fields to forms
+gem "cocoon"

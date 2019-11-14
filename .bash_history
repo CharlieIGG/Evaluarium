@@ -69,3 +69,10 @@ rspec
 rails g controller Users index new edit create update destroy
 bundle
 bundle
+rails generate devise_invitable:install
+rails generate devise_invitable User
+rails generate devise_invitable:views
+rails g migration add_metadata_to_users name:string phone:string
+rails g migration add_metadata_to_users name:string phone:string position:string
+rails db:migrate
+rails generate devise_invitable:views users

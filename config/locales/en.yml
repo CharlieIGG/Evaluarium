@@ -35,3 +35,12 @@ en:
       user:
         one: "User"
         other: "Users"
+  controller_actions:
+    new: new
+    edit: edit
+    create: create
+    update: update
+    destroy: destroy
+  features:
+    invites:
+      email_helper_text: "An invitation to join the platform will be sent to this email."

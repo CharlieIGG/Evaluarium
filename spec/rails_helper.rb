@@ -67,7 +67,11 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
-  # config.filter_gems_from_backtrace("gem name")
+  config.filter_gems_from_backtrace('wicked', 'warden', 'bullet', 'rack',
+                                    'railties', 'capybara', 'xirr-e8488a95b217',
+                                    'bootsnap', 'spring-commands-rspec',
+                                    'newrelic', 'sentry-raven', 'draper',
+                                    'new_relic', 'newrelic_rpm')
 end
 
 Shoulda::Matchers.configure do |config|

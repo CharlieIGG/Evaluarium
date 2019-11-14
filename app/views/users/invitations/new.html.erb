@@ -14,6 +14,11 @@
             <%= f.text_field :email, type: 'email', class: "form-control" %>
             <small class="text-primary"><%= t 'features.invites.email_helper_text' %></small>
           </div>
+          <div class="form-group">
+            <label for="roles">Roles</label>
+            <%= select_tag 'roles[0]', options_for_select(%w[foo bar baz]) %>
+            <%= select_tag 'roles[1]', options_for_select(%w[foo bar baz]) %>
+          </div>
         </p>
       </div>
     </div>
