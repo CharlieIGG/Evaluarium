@@ -19,9 +19,6 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update,
-                                      keys: [
-                                        person_attributes: %i[phone position
-                                                              name email id]
-                                      ])
+                                      keys: %i[phone position name email id])
   end
 end

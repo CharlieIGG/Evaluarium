@@ -8,5 +8,9 @@ module Users
       # We will override this method to also assign roles
       resource_class.invite!(invite_params, current_inviter, &block)
     end
+
+    def after_invite_path_for(_resource)
+      users_path
+    end
   end
 end

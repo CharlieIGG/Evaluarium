@@ -44,3 +44,5 @@ en:
   features:
     invites:
       email_helper_text: "An invitation to join the platform will be sent to this email."
+  actions: actions
+  unknown: unknown

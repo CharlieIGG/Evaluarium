@@ -5,26 +5,34 @@
 #
 class UserPolicy < ApplicationPolicy
   def index
-    super || user.has_role?(:admin)
+    super || admin?
   end
 
   def new
-    super || user.has_role?(:admin)
+    super || admin?
   end
 
   def create
-    super || user.has_role?(:admin)
+    super || admin?
   end
 
   def edit
-    super || (user.has_role?(:admin) && !(record.has_role?(:superadmin) || record.has_role?(:admin)))
+    super || admin? && !admin_group?(record)
   end
 
   def update
-    super || (user.has_role?(:admin) && !(record.has_role?(:superadmin) || record.has_role?(:admin)))
+    super || admin? && !admin_group?(record)
   end
 
   def destroy
-    super || (user.has_role?(:admin) && !(record.has_role?(:superadmin) || record.has_role?(:admin)))
+    super || admin? && !admin_group?(record)
+  end
+
+  class Scope < Scope
+    def resolve
+      return scope.all if user.has_role?(:superadmin) || user.has_role?(:admin)
+
+      scope.none
+    end
   end
 end

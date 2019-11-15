@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def index
     authorize User
+    @deco_users = policy_scope(User.all).decorate
   end
 
   def new
