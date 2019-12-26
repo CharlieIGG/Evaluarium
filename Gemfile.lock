@@ -425,7 +425,7 @@ DEPENDENCIES
   normalize-rails
   pg (>= 0.18, < 2.0)
   pry
-  puma (~> 3.11)
+  puma (~> 3.12)
   pundit (~> 2.0, >= 2.0.1)
   rack-canonical-host
   rack-mini-profiler
