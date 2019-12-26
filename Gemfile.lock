@@ -42,6 +42,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.0.1)
       activesupport (= 6.0.1)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.0.1)
       activemodel (= 6.0.1)
       activesupport (= 6.0.1)
@@ -106,6 +110,7 @@ GEM
       xpath (~> 3.2)
     childprocess (3.0.0)
     choice (0.2.0)
+    cocoon (1.2.14)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
@@ -121,6 +126,12 @@ GEM
       devise (>= 4.0.0)
     diff-lcs (1.3)
     docile (1.3.2)
+    draper (3.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
     erubi (1.9.0)
     execjs (2.7.0)
     factory_bot (5.1.1)
@@ -171,6 +182,14 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.3.4)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -209,8 +228,10 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.1)
-    puma (3.12.2)
-    rack (2.0.8)
+    puma (3.12.1)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
+    rack (2.0.7)
     rack-canonical-host (0.2.3)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
@@ -260,6 +281,8 @@ GEM
       ffi (~> 1.0)
     redis (4.1.3)
     regexp_parser (1.6.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -386,19 +409,24 @@ DEPENDENCIES
   bundler-audit (>= 0.5.0)
   byebug
   capybara (>= 2.15)
+  cocoon
   devise
   devise_invitable (~> 1.7.0)
+  draper
   factory_bot_rails
   ffaker
   guard-rspec
   jquery-rails
   kaminari
+  letter_opener
+  letter_opener_web (~> 1.0)
   listen (>= 3.0.5, < 3.2)
   mini_magick
   normalize-rails
   pg (>= 0.18, < 2.0)
   pry
   puma (~> 3.12)
+  pundit (~> 2.0, >= 2.0.1)
   rack-canonical-host
   rack-mini-profiler
   rack-timeout

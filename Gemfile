@@ -36,6 +36,8 @@ group :development do
   gem "annotate"
   gem "rack-timeout", require:"rack/timeout/base"
   gem "rails-erd"
+  gem "letter_opener"
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 # Test gems
@@ -67,7 +69,14 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise"
 gem "rolify"
+gem 'pundit', '~> 2.0', '>= 2.0.1'
 gem "devise_invitable", "~> 1.7.0"
 gem "kaminari"
 gem "mini_magick"
 gem "aws-sdk-s3", "~> 1.9", require: false
+
+# Model instance decoration
+gem 'draper'
+
+# Dynamically add nested_fields to forms
+gem "cocoon"

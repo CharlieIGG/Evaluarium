@@ -1,0 +1,34 @@
+<div class="container">
+  <%= form_for @user do |f| %>
+    <%= render 'components/section_header', title: "#{(t action_name, scope: 'controller_actions').titleize} #{User.model_name.human}" do %>
+      <div class="actions">
+        <%= render 'components/forms/submit_button_main', f:f %>
+      </div>
+    <% end %>
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: "form-control", type: 'email' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :position %>
+          <%= f.text_field :position, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label for="roles">Roles</label>
+          <%= select_tag 'roles[0]', options_for_select(%w[foo bar baz]) %>
+          <%= select_tag 'roles[1]', options_for_select(%w[foo bar baz]) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
