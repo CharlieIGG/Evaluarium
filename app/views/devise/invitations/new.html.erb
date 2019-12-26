@@ -7,7 +7,7 @@
     <% end %>
     <div class="card">
       <div class="card-body">
-        <%= devise_error_messages! %>
+        <%= render 'devise/shared/error_messages', resource: f.object %>
         <p>
           <div class="form-group">
             <%= f.label :email %>

@@ -58,11 +58,20 @@ RSpec.describe 'Manage Users', type: :system do
 
       it 'can edit a user' do
         new_email = 'new@email.com'
+        new_name = 'NEW NAME'
+        new_phone = '8888-8888'
+        new_position = 'SUPER FAKE CEO'
         visit edit_user_path(user)
         fill_in 'Email', with: new_email
+        fill_in 'Name', with: new_name
+        fill_in 'Phone', with: new_phone
+        fill_in 'Position', with: new_position
         click_on 'Update User'
         expect(current_path).to eq(users_path)
         expect(user.reload.email).to eq(new_email)
+        expect(user.reload.name).to eq(new_name)
+        expect(user.reload.phone).to eq(new_phone)
+        expect(user.reload.position).to eq(new_position)
       end
     end
   end
