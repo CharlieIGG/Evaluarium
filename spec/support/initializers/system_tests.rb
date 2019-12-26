@@ -26,6 +26,7 @@ Capybara.register_driver :chrome_headless do |app|
 end
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
   # For "normal" system tests (i.e. no javascript UI, etc) use the :rack_test
   # driver:
   config.before :each, type: :system do

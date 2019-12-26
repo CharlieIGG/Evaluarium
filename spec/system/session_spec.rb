@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.feature 'Login', type: :system do
+RSpec.describe 'Login', type: :system do
   context 'log in' do
-    scenario 'should be succesful' do
+    context 'should be succesful' do
       user = FactoryBot.create(:user)
       visit new_user_session_path
       within('form') do
@@ -13,7 +13,7 @@ RSpec.feature 'Login', type: :system do
       expect(current_path).to eq root_path
     end
 
-    scenario 'should fail' do
+    context 'should fail' do
       user = FactoryBot.create(:user)
       visit new_user_session_path
       within('form') do

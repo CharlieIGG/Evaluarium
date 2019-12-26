@@ -5,6 +5,7 @@ module Users
     private
 
     def invite_resource(&block)
+      authorize resource_class, :create?
       # We will override this method to also assign roles
       resource_class.invite!(invite_params, current_inviter, &block)
     end

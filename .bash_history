@@ -76,3 +76,20 @@ rails g migration add_metadata_to_users name:string phone:string
 rails g migration add_metadata_to_users name:string phone:string position:string
 rails db:migrate
 rails generate devise_invitable:views users
+rails routes | grep invit
+bundle
+gem "select2-rails"
+gem uninstall "select2-rails"
+bundle
+rails routes | grep invit
+guard -c
+rails c
+guard -c
+guard -c
+rspec spec/system/
+rspec spec/system/
+rspec spec/system/
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+spring stop
+rspec spec/system/session_spec.rb 
