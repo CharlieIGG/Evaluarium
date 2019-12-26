@@ -1,0 +1,9 @@
+<% flash.each do |key, value| %>
+  <% if value.class == Array %>
+    <% value.each do |subvalue| %>
+      <%= "#{key}: #{subvalue.to_s.squish}" %>
+    <% end %>
+  <% else %>
+    <%= "#{key}: #{value.to_s.squish}" %>
+  <% end %>
+<% end %>

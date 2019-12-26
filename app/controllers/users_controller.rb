@@ -15,15 +15,20 @@ class UsersController < ApplicationController
 
   def edit; end
 
-  def create
-    byebug
-  end
-
   def update; end
 
-  def destroy; end
+  def destroy
+    authorize @user
+    return on_destroy_succeeded if @user.destroy
+
+    redirect_to users_path, alert: @project.errors.full_messages
+  end
 
   private
+
+  def on_destroy_succeeded
+    redirect_to users_path, notice: t('models.successfully_deleted')
+  end
 
   def set_user
     @user = User.find(params[:id])

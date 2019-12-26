@@ -32,6 +32,7 @@
 en:
   activerecord:
     models:
+      successfully_deleted: "Successfully deleted"
       user:
         one: "User"
         other: "Users"
@@ -41,8 +42,10 @@ en:
     create: create
     update: update
     destroy: destroy
+    delete: delete
   features:
     invites:
       email_helper_text: "An invitation to join the platform will be sent to this email."
   actions: actions
+  confirm_delete_resource: Are you sure? This action cannot be undone.
   unknown: unknown

@@ -93,3 +93,26 @@ rspec spec/system/session_spec.rb
 rspec spec/system/session_spec.rb 
 spring stop
 rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+clear
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec spec/system/session_spec.rb 
+rspec
+rails g devise:views
+rails g devise:views
+rspec
+rspec
+rspec
+rspec ./spec/system/manage_users_spec.rb
+rspec
+rails routes | grep user
+rails c
+guard -c

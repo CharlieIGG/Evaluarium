@@ -2,6 +2,11 @@
 
 module Users
   class InvitationsController < Devise::InvitationsController
+    def new
+      authorize resource_class, :create?
+      super
+    end
+
     private
 
     def invite_resource(&block)

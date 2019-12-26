@@ -1,3 +1,4 @@
+<%= render 'layouts/flash_messages' %>
 <div class="container">
   <%= render 'components/section_header', title: User.model_name.human(count: 2) do %>
     <div class="actions">
@@ -6,7 +7,7 @@
   <% end %>
   <div class="card">
     <div class="card-body table-responsive">
-      <table class="table table-striped table-borderless table-light">
+      <table class="table table-striped table-borderless table-light rspec_users_table">
         <thead>
           <tr>
             <th><%= t User.human_attribute_name :name  %></th>
@@ -35,9 +36,9 @@
                     <%= t 'Actions' %>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <%= link_to t('controller_actions.edit').titleize, edit_user_path(deco_user), class: 'dropdown-item' %>
+                    <%= link_to t('controller_actions.delete').titleize, user_path(deco_user), method: :delete,
+                                          data: { confirm: t('confirm_delete_resource') }, class: 'dropdown-item'  %>
                   </div>
                 </div>
               </td>
