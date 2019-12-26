@@ -34,7 +34,7 @@ module STARTUPAPP
     end
 
     config.i18n.enforce_available_locales = true
-
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     # Permitted locales available for the application
     I18n.available_locales = %i[en es]
 

@@ -13,9 +13,17 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit; end
+  def edit
+    authorize @user
+  end
 
-  def update; end
+  def update
+    authorize @user
+    return on_update_succeeded if @user.update(user_params)
+
+    flash[:alert] = @project.errors.full_messages
+    render :edit
+  end
 
   def destroy
     authorize @user
@@ -27,7 +35,19 @@ class UsersController < ApplicationController
   private
 
   def on_destroy_succeeded
-    redirect_to users_path, notice: t('models.successfully_deleted')
+    redirect_to users_path,
+                notice: t(
+                  'controllers.shared_messages.successfully_deleted',
+                  resource_name: t(@user.model_name)
+                )
+  end
+
+  def on_update_succeeded
+    redirect_to users_path,
+                notice: t(
+                  'controllers.shared_messages.successfully_saved',
+                  resource_name: t(@user.model_name)
+                )
   end
 
   def set_user
@@ -35,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :name, :phone, :position)
   end
 end

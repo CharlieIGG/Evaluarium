@@ -30,12 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    models:
-      successfully_deleted: "Successfully deleted"
-      user:
-        one: "User"
-        other: "Users"
   controller_actions:
     new: new
     edit: edit

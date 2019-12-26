@@ -17,6 +17,7 @@ RSpec.describe 'Manage Users', type: :system do
   end
   context 'As a Superadmin' do
     let(:current_user) { create(:user, :superadmin) }
+
     it 'can invite a new user successfully' do
       visit new_user_invitation_path
       fill_in 'Email', with: 'some.valid@email.com'
@@ -30,18 +31,39 @@ RSpec.describe 'Manage Users', type: :system do
       expect(user_rows.count).to eq(6) # 5 created + 1 admin user
     end
 
-    it 'can go to edit a user', js: true do
-      create(:user, email: 'zzz@zzz.com')
-      visit users_path
-      user_rows = all('.rspec_users_table tbody tr')
-      within user_rows.last do
-        click_on 'Actions'
+    context 'managing a specific user' do
+      let!(:user) { create(:user, email: 'zzz@zzz.com') }
+
+      it 'can delete a user', js: true do
+        visit users_path
+        within find('.rspec_users_table tr', text: user.email) do
+          click_on 'Actions'
+        end
+        expect do
+          click_on 'Delete'
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content('successfully deleted')
+        end.to(change(User, :count).by(-1))
       end
-      expect do
-        click_on 'Delete'
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content('Successfully deleted')
-      end.to(change(User, :count).by(-1))
+
+      it 'can go to edit a user', js: true do
+        visit users_path
+        user_rows = all('.rspec_users_table tbody tr')
+        within user_rows.last do
+          click_on 'Actions'
+        end
+        click_on 'Edit'
+        expect(current_path).to eq(edit_user_path(user))
+      end
+
+      it 'can edit a user' do
+        new_email = 'new@email.com'
+        visit edit_user_path(user)
+        fill_in 'Email', with: new_email
+        click_on 'Update User'
+        expect(current_path).to eq(users_path)
+        expect(user.reload.email).to eq(new_email)
+      end
     end
   end
 end

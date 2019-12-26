@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: program_criteria
+#
+#  id                      :bigint           not null, primary key
+#  evaluation_program_id   :bigint           not null
+#  evaluation_criterium_id :bigint           not null
+#  position                :integer
+#  weight                  :float
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
+
+
 #
 # This is an "instance" of an EvaluationCriteria scoped to a specific
 # evaluation program. Each "instance" carries it's own position (order)

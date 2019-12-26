@@ -1,0 +1,7 @@
+en:
+  controllers:
+    shared_messages:
+      successfully_invited: "%{resource_name} successfully invited"
+      successfully_created: "%{resource_name} successfully created"
+      successfully_deleted: "%{resource_name} successfully deleted"
+      successfully_saved: "%{resource_name} successfully saved"

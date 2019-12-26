@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: evaluation_programs
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  start_at   :datetime
+#  end_at     :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 FactoryBot.define do
   factory :evaluation_program do
     name { "MyString" }
