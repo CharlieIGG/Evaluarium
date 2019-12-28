@@ -1,6 +1,6 @@
 # STARTUPAPP
 
-![](https://github.com/CharlieIGG/startupapp/workflows/Tests/badge.svg)
+![](https://github.com/CharlieIGG/startupapp/workflows/specs/badge.svg)
 
 Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and other kinds of public and private scenarios for evaluating startups.
 
@@ -23,8 +23,8 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
 
 ### Environment URLS
 
-* **Production** - TBD
-* **Staging** - TBD
+- **Production** - TBD
+- **Staging** - TBD
 
 ### Da team
 
@@ -36,10 +36,10 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
 
 You should ask for access to this tools if you don't have it already:
 
-* [Github repo](https://github.com/charlieigg/STARTUPAPP)
-* [Pivotal tracker project](https://www.pivotaltracker.com/)
-* [Client Slack](https://change-me.slack.com/)
-* [Heroku](https://heroku.com)
+- [Github repo](https://github.com/charlieigg/STARTUPAPP)
+- [Pivotal tracker project](https://www.pivotaltracker.com/)
+- [Client Slack](https://change-me.slack.com/)
+- [Heroku](https://heroku.com)
 
 ## Development
 
@@ -62,6 +62,7 @@ After installing please you can follow this simple steps:
 $ git clone git@github.com:charlieigg/startupapp.git
 
 ```
+
 2. Copy the `example.env` file to `.env` in the project's source directory.
 
 ```bash
@@ -111,7 +112,6 @@ $ docker-compose up
 ```
 
 That command will lift every service STARTUPAPP needs, such as the `rails server`, `postgres`, and `redis`.
-
 
 It may take a while before you see anything, you can follow the logs of the containers with:
 
@@ -229,9 +229,10 @@ codeclimate engine:install
 3: Finally, run codeclimate to analyze the code:
 codeclimate analyze
 ```
+
 ## Deploying
 
 If you have previously run the `./bin/setup` script,
 you can deploy to staging and production with:
-    % ./bin/deploy staging
-    % ./bin/deploy production
+% ./bin/deploy staging
+% ./bin/deploy production
