@@ -84,3 +84,5 @@ end
 
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'test_prof/recipes/rspec/let_it_be'
+require 'test_prof/recipes/rspec/factory_default'
