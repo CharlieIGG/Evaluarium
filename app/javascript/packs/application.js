@@ -19,7 +19,9 @@ require("@rails/activestorage").start()
 import "bootstrap";
 
 import "../stylesheets/application";
-console.log("Imported///")
-document.addEventListener("turbolinks:load", () => {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+
+var req = require.context("../global", true, /^(.*\.(js$))[^.]*$/im);
+req.keys().forEach(function (key) {
+  req(key);
+});
+// or just: req.keys().forEach(req)

@@ -20,7 +20,6 @@ gem 'bootstrap', '~> 4.3.1'
 gem "rack-mini-profiler", require: false
 
 # CSS frameworks
-gem "normalize-rails"
 gem "autoprefixer-rails"
 
 # Active Jobs
