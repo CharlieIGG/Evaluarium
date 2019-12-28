@@ -10,6 +10,7 @@
         "normalize.css": "^8.0.1",
         "popper.js": "^1.16.0",
         "rails-erb-loader": "^5.5.2",
+        "select2": "^4.0.12",
         "turbolinks": "^5.2.0"
     },
     "devDependencies": {
