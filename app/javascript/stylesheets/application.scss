@@ -1,0 +1,11 @@
+@import "normalize.css";
+
+@import "./settings/mixins";
+@import "./settings/placeholders";
+@import "./settings/utilities";
+@import "./settings/variables";
+
+@import "~bootstrap/scss/bootstrap";
+@import "select2/dist/css/select2.css";
+
+@import "./components/buttons";

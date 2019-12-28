@@ -15,9 +15,23 @@
             <small class="text-primary"><%= t 'features.invites.email_helper_text' %></small>
           </div>
           <div class="form-group">
-            <label for="roles">Roles</label>
-            <%= select_tag 'roles[0]', options_for_select(%w[foo bar baz]) %>
-            <%= select_tag 'roles[1]', options_for_select(%w[foo bar baz]) %>
+            <h3>Roles</h3>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <label for="roles">Role</label>
+                <%= select_tag 'roles[0][name]', options_for_select(["Member", "Admin"]),
+                                     include_hidden: false, value: "Member",
+                                     multiple: false,
+                                     class:"form-control select--main auto-select2 select-select2"%>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <label for="roles">Resource</label>
+                <%= select_tag 'roles[0][resource_id]', options_for_select([["Some Startup", 1], ["Kleen NRG", 2]]),
+                                     include_hidden: false, value: 2,
+                                     multiple: false,
+                                     class:"form-control select--main auto-select2 select-select2"%>
+              </div>
+            </div>
           </div>
         </p>
       </div>

@@ -10,13 +10,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= javascript_pack_tag 'application'%>
     <%= yield :stylesheets %>
   </head>
   <body>
     <%= yield %>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'application'%>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>
       <script type="text/javascript">

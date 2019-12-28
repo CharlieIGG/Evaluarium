@@ -1,0 +1,133 @@
+.btn {
+  font-size: px-to-rems(12);
+  text-transform: uppercase;
+
+  &--cta {
+    position: relative;
+    padding-bottom: px-to-rems(5);
+    transition: all 0.3s ease-in-out;
+    color: $primary;
+    font-size: px-to-rems(14);
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      transform: scale(0);
+      transition: all 0.3s ease-in-out;
+      background: $primary;
+    }
+  }
+
+  &--cta:hover {
+    &::after {
+      transform: scale(1);
+    }
+  }
+
+  &--add {
+    @extend .btn--cta;
+    color: $secondary;
+
+    &::after {
+      background: $secondary;
+    }
+  }
+
+  &--soft-primary {
+    background: lighten($primary, 35%);
+    border: 1px solid $primary;
+    color: $primary;
+
+    &:hover {
+      color: $white;
+      background: lighten($primary, 5%);
+    }
+  }
+
+  &--soft-secondary {
+    background: lighten($secondary, 55%);
+    border: 1px solid $secondary;
+    color: $secondary;
+
+    &:hover {
+      color: $white;
+      background: lighten($secondary, 5%);
+    }
+  }
+
+  &--alpha {
+    border: 2px solid $primary;
+    color: $primary;
+
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
+}
+
+.btns__container {
+  display: flex;
+
+  >* {
+    margin-left: 10px;
+  }
+}
+
+//STICKY BUTTONS
+
+@keyframes stick {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transfrom: scale(1);
+  }
+}
+
+@keyframes unstick {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.sticky-button {
+  position: relative;
+  bottom: 0;
+  animation: unstick 0.5s;
+}
+
+.sticky {
+  display: block;
+  position: fixed !important;
+  z-index: 10;
+  right: px-to-rems(40);
+  bottom: px-to-rems(40) !important;
+  transition: all 0.5s ease-in-out;
+  animation: stick 0.5s;
+  opacity: 1;
+
+  &.btn {
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn {
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+}

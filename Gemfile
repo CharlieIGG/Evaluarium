@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.6.3"
 
-gem "rails", "~> 6.0.0"
+gem "rails", "~> 6.0.2"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.12"
 gem "sass-rails", "~> 5"
@@ -20,7 +20,6 @@ gem 'bootstrap', '~> 4.3.1'
 gem "rack-mini-profiler", require: false
 
 # CSS frameworks
-gem "normalize-rails"
 gem "autoprefixer-rails"
 
 # Active Jobs
