@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Manage Users', type: :system do
-  let(:current_user) { create(:user) }
+  let_it_be(:current_user) { create(:user) }
 
   signed_in_as :current_user
 
@@ -16,7 +16,7 @@ RSpec.describe 'Manage Users', type: :system do
     end
   end
   context 'As a Superadmin' do
-    let(:current_user) { create(:user, :superadmin) }
+    current_user_roles!([{ name: :superadmin }])
 
     it 'can invite a new user successfully' do
       visit new_user_invitation_path
@@ -32,7 +32,7 @@ RSpec.describe 'Manage Users', type: :system do
     end
 
     context 'managing a specific user' do
-      let!(:user) { create(:user, email: 'zzz@zzz.com') }
+      let_it_be(:user, reload: true) { create(:user, email: 'zzz@zzz.com') }
 
       it 'can delete a user', js: true do
         visit users_path
@@ -69,9 +69,9 @@ RSpec.describe 'Manage Users', type: :system do
         click_on 'Update User'
         expect(current_path).to eq(users_path)
         expect(user.reload.email).to eq(new_email)
-        expect(user.reload.name).to eq(new_name)
-        expect(user.reload.phone).to eq(new_phone)
-        expect(user.reload.position).to eq(new_position)
+        expect(user.name).to eq(new_name)
+        expect(user.phone).to eq(new_phone)
+        expect(user.position).to eq(new_position)
       end
     end
   end

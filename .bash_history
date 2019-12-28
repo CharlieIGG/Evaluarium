@@ -116,3 +116,16 @@ rspec
 rails routes | grep user
 rails c
 guard -c
+rails c
+rails c
+rspec
+guard -c
+echo $RAILS_ENV
+bundle
+rspec
+rspec
+bundle
+rspec
+guard -c
+rails c
+guard -c

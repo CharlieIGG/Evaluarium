@@ -18,6 +18,7 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
     - [Restoring the database](#restoring-the-database)
     - [Debugging](#debugging)
     - [Running specs](#running-specs)
+      - [TestProf](#testprof)
     - [Analyzing code for issues](#analyzing-code-for-issues)
   - [Deploying](#deploying)
 
@@ -210,6 +211,11 @@ Or for a specific file:
 ```
 $ plis run test rspec spec/models/user_spec.rb
 ```
+
+#### TestProf
+
+We use https://test-prof.evilmartians.io/#/ to profile tests, along with the `let_it_be` and `create_default` recipes there included to minimize the time spent in each test's setup and teardown.
+These two recipes are very helpful to keep testing time in check, but they do come with a handful of caveats you need to be aware of, and which you can read [here](https://test-prof.evilmartians.io/#/let_it_be?id=caveats-amp-modifers).
 
 ### Analyzing code for issues
 

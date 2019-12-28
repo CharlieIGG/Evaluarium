@@ -102,6 +102,8 @@ services:
       <<: *app_environment
       RAILS_ENV: test
       RACK_ENV: test
+      FDOC: 1 #Factory Doctor activated
+      RD_PROF: 1 #RSpec Dissect activated
 
   worker:
     <<: *app
