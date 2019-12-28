@@ -1,10 +1,11 @@
-name: Tests
+name: specs
 on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip specs]')"
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: BUILD TEST
         run: docker-compose build test
       - name: MIGRATE TEST
