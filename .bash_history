@@ -129,3 +129,11 @@ rspec
 guard -c
 rails c
 guard -c
+yarn add bootstrap jquery popper.js
+yarn add @rails/ujs
+yarn add @rails/activestorage turbolinks
+bundle update
+bundle
+rails assets:clobber
+echo $STARTUPAPP_WEBPACKER_DEV_SERVER_PORT
+env
