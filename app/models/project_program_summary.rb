@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: project_program_summaries
+# Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
 #  average               :float
@@ -17,8 +17,7 @@
 #
 # This class depicts the track record for a Project in any given EvaluationProgram
 #
-class ProjectProgramSummary < ApplicationRecord
+class ProjectEvaluationSummary < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :project
-  has_many :program_criteria, through: :evaluation_program
 end

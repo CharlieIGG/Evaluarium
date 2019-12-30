@@ -146,3 +146,10 @@ webpack
 yarn install
 rspec
 rspec
+rails g model EvaluationScore evaluation_criterion:references project_program_summary:references total:float
+rails g migration add_timestamp_and_scores_to_project_evaluation_summaries timestamp:datetime scores:jsonb
+rails db:drop db:create db:migrate
+rails db:drop db:create db:migrate
+rails db:drop db:create db:migrate
+        rails db:environment:set RAILS_ENV=test
+rails db:drop db:create db:migrate

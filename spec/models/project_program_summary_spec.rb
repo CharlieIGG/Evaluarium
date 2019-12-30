@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: project_program_summaries
+# Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
 #  average               :float
@@ -16,10 +16,10 @@
 
 require 'rails_helper'
 
-RSpec.describe ProjectProgramSummary, type: :model do
-  subject { build_stubbed(:project_program_summary) }
+RSpec.describe ProjectEvaluationSummary, type: :model do
+  subject { build_stubbed(:project_evaluation_summary) }
 
   it { should belong_to(:project) }
   it { should belong_to(:evaluation_program) }
-  it { should have_many(:program_criteria).through(:evaluation_program) }
+  it { should have_many(:evaluation_scores) }
 end
