@@ -20,4 +20,5 @@ RSpec.describe EvaluationProgram, type: :model do
   it { should have_many(:projects).through(:project_program_summaries) }
   it { should have_many(:program_criteria) }
   it { should have_many(:evaluation_criteria).through(:program_criteria) }
+  it { should validate_uniqueness_of(:name) }
 end
