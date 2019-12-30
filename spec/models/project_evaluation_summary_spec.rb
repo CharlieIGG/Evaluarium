@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: project_program_summaries
+# Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
 #  average               :float
@@ -14,11 +14,12 @@
 #
 
 
-#
-# This class depicts the track record for a Project in any given EvaluationProgram
-#
-class ProjectProgramSummary < ApplicationRecord
-  belongs_to :evaluation_program
-  belongs_to :project
-  has_many :program_criteria, through: :evaluation_program
+require 'rails_helper'
+
+RSpec.describe ProjectEvaluationSummary, type: :model do
+  subject { build_stubbed(:project_evaluation_summary) }
+
+  it { should belong_to(:project) }
+  it { should belong_to(:evaluation_program) }
+  it { should have_many(:evaluation_scores) }
 end
