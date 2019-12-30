@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe EvaluationScore, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to :project_evaluation_summary }
+  it { should belong_to :evaluation_criterium }
 end

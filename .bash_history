@@ -153,3 +153,4 @@ rails db:drop db:create db:migrate
 rails db:drop db:create db:migrate
         rails db:environment:set RAILS_ENV=test
 rails db:drop db:create db:migrate
+guard -c

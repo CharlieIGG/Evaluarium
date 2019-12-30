@@ -20,4 +20,6 @@
 class ProjectEvaluationSummary < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :project
+
+  has_many :evaluation_scores
 end

@@ -23,5 +23,5 @@
 class ProgramCriterium < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :evaluation_criterium
-  has_many :project_evaluation_summaries, -> { distinct }, through: :evaluation_program
+  has_many :evaluation_scores
 end
