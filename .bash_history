@@ -137,3 +137,12 @@ bundle
 rails assets:clobber
 echo $STARTUPAPP_WEBPACKER_DEV_SERVER_PORT
 env
+rails db:create
+rspec
+rspec
+rspec
+rails webpacker:compile
+webpack
+yarn install
+rspec
+rspec
