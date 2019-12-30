@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: project_program_summaries
+# Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
 #  average               :float
@@ -12,7 +12,7 @@
 #
 
 FactoryBot.define do
-  factory :project_program_summary do
+  factory :project_evaluation_summary do
     average { 1.5 }
     evaluation_program { nil }
     project { nil }

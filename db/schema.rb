@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_224019) do
+ActiveRecord::Schema.define(version: 2019_12_30_212441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 2019_11_14_224019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "evaluation_scores", force: :cascade do |t|
+    t.bigint "evaluation_criterium_id", null: false
+    t.bigint "project_evaluation_summary_id", null: false
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evaluation_criterium_id"], name: "index_evaluation_scores_on_evaluation_criterium_id"
+    t.index ["project_evaluation_summary_id"], name: "index_evaluation_scores_on_project_evaluation_summary_id"
+  end
+
   create_table "program_criteria", force: :cascade do |t|
     t.bigint "evaluation_program_id", null: false
     t.bigint "evaluation_criterium_id", null: false
@@ -62,15 +72,17 @@ ActiveRecord::Schema.define(version: 2019_11_14_224019) do
     t.index ["evaluation_program_id"], name: "index_program_criteria_on_evaluation_program_id"
   end
 
-  create_table "project_program_summaries", force: :cascade do |t|
+  create_table "project_evaluation_summaries", force: :cascade do |t|
     t.float "average"
     t.bigint "evaluation_program_id", null: false
     t.bigint "project_id", null: false
     t.date "program_start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["evaluation_program_id"], name: "index_project_program_summaries_on_evaluation_program_id"
-    t.index ["project_id"], name: "index_project_program_summaries_on_project_id"
+    t.datetime "timestamp"
+    t.jsonb "scores", default: {}
+    t.index ["evaluation_program_id"], name: "index_project_evaluation_summaries_on_evaluation_program_id"
+    t.index ["project_id"], name: "index_project_evaluation_summaries_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -126,8 +138,10 @@ ActiveRecord::Schema.define(version: 2019_11_14_224019) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "evaluation_scores", "evaluation_criteria"
+  add_foreign_key "evaluation_scores", "project_evaluation_summaries"
   add_foreign_key "program_criteria", "evaluation_criteria"
   add_foreign_key "program_criteria", "evaluation_programs"
-  add_foreign_key "project_program_summaries", "evaluation_programs"
-  add_foreign_key "project_program_summaries", "projects"
+  add_foreign_key "project_evaluation_summaries", "evaluation_programs"
+  add_foreign_key "project_evaluation_summaries", "projects"
 end
