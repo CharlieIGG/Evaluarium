@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: evaluation_programs
@@ -12,8 +14,8 @@
 
 FactoryBot.define do
   factory :evaluation_program do
-    name { "MyString" }
-    start_at { "2019-11-13 01:04:14" }
-    end_at { "2019-11-13 01:04:14" }
+    sequence(:name) { |n| "Program #{n}" }
+    start_at { '2019-11-13 01:04:14' }
+    end_at { '2019-11-13 01:04:14' }
   end
 end

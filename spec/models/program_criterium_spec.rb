@@ -17,6 +17,8 @@
 require 'rails_helper'
 
 RSpec.describe ProgramCriterium, type: :model do
+  subject { create(:program_criterium) }
   it { should belong_to :evaluation_criterium }
   it { should belong_to :evaluation_program }
+  it { should validate_uniqueness_of(:evaluation_criterium_id).scoped_to(:evaluation_program_id) }
 end

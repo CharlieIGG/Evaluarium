@@ -22,4 +22,6 @@ class EvaluationProgram < ApplicationRecord
   has_many :program_criteria
   has_many :projects, through: :project_evaluation_summaries
   has_many :evaluation_criteria, through: :program_criteria
+
+  validates :name, uniqueness: true
 end

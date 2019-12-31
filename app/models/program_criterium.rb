@@ -24,4 +24,6 @@ class ProgramCriterium < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :evaluation_criterium
   has_many :evaluation_scores
+
+  validates :evaluation_criterium_id, uniqueness: { scope: :evaluation_program_id }
 end
