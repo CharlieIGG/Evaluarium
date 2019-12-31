@@ -43,11 +43,43 @@ RSpec.describe EvaluationScore, type: :model do
     end
 
     context 'on update' do
-      pending 'TBD'
+      let!(:score) { create(:evaluation_score, total: 70, project_evaluation_summary: project_evaluation_summary) }
+
+      it 'triggers a reevaluation of the Summarys average' do
+        expect(project_evaluation_summary.average).to eq(70)
+
+        score.update(total: 80)
+
+        expect(project_evaluation_summary.reload.average).to eq(80)
+      end
+
+      it 'triggers an update of the Summarys scores' do
+        expect(project_evaluation_summary.scores[score.name]).to eq(70)
+
+        score.update(total: 80)
+
+        expect(project_evaluation_summary.scores[score.name]).to eq(80)
+      end
     end
 
     context 'on destroy' do
-      pending 'TBD'
+      let!(:score) { create(:evaluation_score, total: 70, project_evaluation_summary: project_evaluation_summary) }
+
+      it 'triggers a reevaluation of the Summarys average' do
+        expect(project_evaluation_summary.average).to eq(70)
+
+        score.destroy
+
+        expect(project_evaluation_summary.reload.average).to eq(0)
+      end
+
+      it 'triggers an update of the Summarys scores' do
+        expect(project_evaluation_summary.scores[score.name]).to eq(70)
+
+        score.destroy
+
+        expect(project_evaluation_summary.scores[score.name]).to eq(nil)
+      end
     end
   end
 end

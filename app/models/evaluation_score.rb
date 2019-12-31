@@ -25,10 +25,12 @@ class EvaluationScore < ApplicationRecord
   validates :evaluation_criterium_id, uniqueness: { scope: :project_evaluation_summary_id }
 
   after_commit :update_summary!
+  after_destroy :update_summary!
 
   def update_summary!
-    project_evaluation_summary.calculate_average
-    project_evaluation_summary.scores[evaluation_criterium.name] = total
+    project_evaluation_summary.recalculate_average
+    scores_total = persisted? ? total : nil
+    project_evaluation_summary.scores[evaluation_criterium.name] = scores_total
     project_evaluation_summary.save
   end
 end

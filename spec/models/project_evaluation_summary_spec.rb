@@ -37,7 +37,7 @@ RSpec.describe ProjectEvaluationSummary, type: :model do
     let_it_be(:c_evaluation_scores) { create_list(:evaluation_score, 2, total: 70, project_evaluation_summary: subject) }
 
     it 'should calculate it\'s own average properly' do
-      subject.calculate_average!
+      subject.recalculate_average!
       expect(subject.reload.average).to eq((100 + 85 + 70) / 3)
     end
   end

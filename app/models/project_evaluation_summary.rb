@@ -27,15 +27,19 @@ class ProjectEvaluationSummary < ApplicationRecord
   validates_numericality_of :average, less_than_or_equal_to: 100,
                                       greater_than_or_equal_to: 0
 
-  def calculate_average
-    return if evaluation_scores.empty?
-
-    score = evaluation_scores.reload.sum(:total) / evaluation_scores.count
-    self.average = score
-    score
+  def recalculate_average
+    self.average = calculate_average
+    calculate_average
   end
 
-  def calculate_average!
-    update(average: calculate_average)
+  def recalculate_average!
+    update(average: recalculate_average)
+  end
+
+  def calculate_average
+    score_count = evaluation_scores.count
+    return 0 unless score_count.positive?
+
+    evaluation_scores.reload.sum(:total) / score_count
   end
 end
