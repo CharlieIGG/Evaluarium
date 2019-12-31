@@ -19,8 +19,13 @@ RSpec.describe EvaluationScore, type: :model do
   subject { create(:evaluation_score) }
   it { should belong_to :project_evaluation_summary }
   it { should belong_to :evaluation_criterium }
-  it { should validate_uniqueness_of(:evaluation_criterium_id).scoped_to(:project_evaluation_summary_id) }
 
+  it { should validate_uniqueness_of(:evaluation_criterium_id).scoped_to(:project_evaluation_summary_id) }
+  it do
+    should(validate_numericality_of(:total)
+              .is_greater_than_or_equal_to(0)
+              .is_less_than_or_equal_to(100))
+  end
   context 'lifecycle hooks' do
     let_it_be(:project_evaluation_summary, reload: true) { create(:project_evaluation_summary) }
 

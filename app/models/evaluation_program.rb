@@ -24,4 +24,8 @@ class EvaluationProgram < ApplicationRecord
   has_many :evaluation_criteria, through: :program_criteria
 
   validates :name, uniqueness: true
+
+  def total_current_percentage(options = {exclude_ids: []})
+    program_criteria.where.not(id: options[:exclude_ids]).sum(:weight)
+  end
 end
