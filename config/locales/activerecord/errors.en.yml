@@ -1,0 +1,13 @@
+en:
+  program_criterium:
+    weight:
+      over_100: "The new weight would bring the Evaluation Program's score-sheet total beyond beyond 100%"
+  evaluation_score:
+    total:
+      out_of_bounds: "The value cannot be less than %{min} or greater than %{max}"
+  evaluation_program:
+    criteria_scale_max:
+      inconsistent: "The Maximum value for a program's Criteria scale must be less than the Minimum value (%{min})."
+    criteria_step_size:
+      inconsistent: "The selected Step-Size for the evaluation of the Criteria is too large for the selected Scale. Please change the scale's Maximum Value and/or choose a different Step Size"
+      incompatible: "The selected Step-Size for the evaluation of the Criteria would not allow to reach all possible values in the selected Scale."

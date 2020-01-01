@@ -1,8 +1,0 @@
-en:
-  activerecord:
-    errors:
-      models:
-        program_criterium:
-          attributes:
-            weight:
-              over_100: "The new weight would bring the total Programs scoresheet beyond beyond 100%"

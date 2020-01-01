@@ -5,7 +5,7 @@
 # Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
-#  average               :float
+#  total_score           :float            default(0.0)
 #  evaluation_program_id :bigint           not null
 #  project_id            :bigint           not null
 #  program_start         :date
@@ -24,22 +24,22 @@ class ProjectEvaluationSummary < ApplicationRecord
   belongs_to :project
   has_many :evaluation_scores
 
-  validates_numericality_of :average, less_than_or_equal_to: 100,
-                                      greater_than_or_equal_to: 0
+  validates_numericality_of :total_score,
+                            less_than_or_equal_to: EvaluationProgram::MAXIMUM_VALID_SCORE,
+                            greater_than_or_equal_to: 0
 
-  def recalculate_average
-    self.average = calculate_average
-    calculate_average
+  def recalculate_total_score
+    self.total_score = calculate_total_score
+    total_score
   end
 
-  def recalculate_average!
-    update(average: recalculate_average)
+  def recalculate_total_score!
+    update(total_score: recalculate_total_score)
   end
 
-  def calculate_average
-    score_count = evaluation_scores.count
-    return 0 unless score_count.positive?
+  def calculate_total_score
+    return 0 unless scores.count.positive?
 
-    evaluation_scores.reload.sum(:total) / score_count
+    scores.map { |_k, score| score[:weighed_points] }.compact.sum
   end
 end

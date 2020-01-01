@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+#
+# Provides custom validations for ProgramCriteria
+#
 class ProgramCriteriumValidator < ActiveModel::Validator
-  MAXIMUM_VALID_PERCENTAGE = 100
-
   def validate(record)
     @record = record
     validate_percentage_consistency
@@ -17,8 +18,8 @@ class ProgramCriteriumValidator < ActiveModel::Validator
     total_without_record = program.total_current_percentage(
       exclude_ids: [@record.id])
     total = total_without_record + @record.weight
-    return unless total > MAXIMUM_VALID_PERCENTAGE
+    return unless total > EvaluationProgram::MAXIMUM_VALID_SCORE
 
-    @record.errors[:weight] << I18n.t('evaluation_criterium.weight.over_100')
+    @record.errors[:weight] << I18n.t('program_criterium.weight.over_100')
   end
 end

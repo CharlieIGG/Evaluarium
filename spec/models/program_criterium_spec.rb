@@ -20,6 +20,7 @@ RSpec.describe ProgramCriterium, type: :model do
   subject { create(:program_criterium, weight: 10) }
   it { should belong_to :evaluation_criterium }
   it { should belong_to :evaluation_program }
+  it { should have_many(:evaluation_scores) }
   it { should validate_uniqueness_of(:evaluation_criterium_id).scoped_to(:evaluation_program_id) }
 
   context 'checking weight consistency' do

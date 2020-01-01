@@ -28,4 +28,6 @@ class ProgramCriterium < ApplicationRecord
 
   validates :evaluation_criterium_id, uniqueness: { scope: :evaluation_program_id }
   validates_with ProgramCriteriumValidator
+
+  delegate :name, to: :evaluation_criterium
 end

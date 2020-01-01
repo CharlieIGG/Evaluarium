@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_212441) do
+ActiveRecord::Schema.define(version: 2020_01_01_122316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,15 +49,18 @@ ActiveRecord::Schema.define(version: 2019_12_30_212441) do
     t.datetime "end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "criteria_scale_max", null: false
+    t.float "criteria_scale_min", null: false
+    t.float "criteria_step_size", default: 1.0, null: false
   end
 
   create_table "evaluation_scores", force: :cascade do |t|
-    t.bigint "evaluation_criterium_id", null: false
+    t.bigint "program_criterium_id", null: false
     t.bigint "project_evaluation_summary_id", null: false
     t.float "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["evaluation_criterium_id"], name: "index_evaluation_scores_on_evaluation_criterium_id"
+    t.index ["program_criterium_id"], name: "index_evaluation_scores_on_program_criterium_id"
     t.index ["project_evaluation_summary_id"], name: "index_evaluation_scores_on_project_evaluation_summary_id"
   end
 
@@ -73,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_212441) do
   end
 
   create_table "project_evaluation_summaries", force: :cascade do |t|
-    t.float "average"
+    t.float "total_score", default: 0.0
     t.bigint "evaluation_program_id", null: false
     t.bigint "project_id", null: false
     t.date "program_start"
@@ -138,7 +141,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_212441) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "evaluation_scores", "evaluation_criteria"
+  add_foreign_key "evaluation_scores", "program_criteria"
   add_foreign_key "evaluation_scores", "project_evaluation_summaries"
   add_foreign_key "program_criteria", "evaluation_criteria"
   add_foreign_key "program_criteria", "evaluation_programs"
