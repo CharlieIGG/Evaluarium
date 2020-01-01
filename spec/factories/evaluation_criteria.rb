@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: evaluation_criteria
@@ -11,7 +13,7 @@
 
 FactoryBot.define do
   factory :evaluation_criterium do
-    name { "MyString" }
-    description { "MyText" }
+    sequence(:name) { |n| "Criterion #{n}" }
+    description { 'MyText' }
   end
 end

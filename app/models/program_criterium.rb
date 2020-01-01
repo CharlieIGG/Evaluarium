@@ -18,10 +18,16 @@
 # This is an "instance" of an EvaluationCriteria scoped to a specific
 # evaluation program. Each "instance" carries it's own position (order)
 # and it's own weight, which will ultimately be used to calculate a total % in
-# each Project's ProjectEvaluationSummary
+# each Project's ProjectEvaluationSummary.
+# PS: We all know the right word is Criterion, but Rails singularizes "criteria" into "criterium".
 #
 class ProgramCriterium < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :evaluation_criterium
   has_many :evaluation_scores
+
+  validates :evaluation_criterium_id, uniqueness: { scope: :evaluation_program_id }
+  validates_with ProgramCriteriumValidator
+
+  delegate :name, to: :evaluation_criterium
 end

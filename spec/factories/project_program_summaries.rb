@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: project_evaluation_summaries
 #
 #  id                    :bigint           not null, primary key
-#  average               :float
+#  total_score            :float
 #  evaluation_program_id :bigint           not null
 #  project_id            :bigint           not null
 #  program_start         :date
@@ -13,9 +15,9 @@
 
 FactoryBot.define do
   factory :project_evaluation_summary do
-    average { 1.5 }
-    evaluation_program { nil }
-    project { nil }
-    program_start { "2019-11-13" }
+    total_score { 0 }
+    evaluation_program
+    project
+    program_start { '2019-11-13' }
   end
 end

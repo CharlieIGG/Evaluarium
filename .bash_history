@@ -154,3 +154,21 @@ rails db:drop db:create db:migrate
         rails db:environment:set RAILS_ENV=test
 rails db:drop db:create db:migrate
 guard -c
+guard -c
+rspec
+guard -c
+guard -c
+guard -c
+rspec spec/models/program_criterium_spec.rb 
+rspec spec/models/evaluation_score_spec.rb 
+rspec spec/models/evaluation_score_spec.rb 
+rspec spec/models/evaluation_score_spec.rb 
+rails c
+guard -c
+uirb
+irb
+rails db:drop db:create db:migrate
+annotate --models
+annotate --models
+rails c
+guard -c

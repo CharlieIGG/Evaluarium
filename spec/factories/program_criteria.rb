@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: program_criteria
@@ -13,8 +15,8 @@
 
 FactoryBot.define do
   factory :program_criterium do
-    evaluation_program { nil }
-    evaluation_criteria { nil }
+    evaluation_program
+    evaluation_criterium
     position { 1 }
     weight { 1.5 }
   end
