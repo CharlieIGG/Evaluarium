@@ -19,5 +19,6 @@ FactoryBot.define do
     evaluation_program
     project
     program_start { '2019-11-13' }
+    evaluator { create(:user) }
   end
 end

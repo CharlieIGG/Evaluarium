@@ -22,8 +22,11 @@
 class ProjectEvaluationSummary < ApplicationRecord
   belongs_to :evaluation_program
   belongs_to :project
+  belongs_to :evaluator, class_name: 'User'
   has_many :evaluation_scores
 
+  validates :evaluator_id, uniqueness: { scope: :evaluation_program_id },
+                           if: :enforce_evaluator_uniqueness?
   validates_numericality_of :total_score,
                             less_than_or_equal_to: EvaluationProgram::MAXIMUM_VALID_SCORE,
                             greater_than_or_equal_to: 0
@@ -42,4 +45,10 @@ class ProjectEvaluationSummary < ApplicationRecord
 
     scores.map { |_k, score| score[:weighed_points] }.compact.sum
   end
+
+  def enforce_evaluator_uniqueness?
+    return false unless evaluation_program.present?
+
+    evaluation_program.competition?
+end
 end

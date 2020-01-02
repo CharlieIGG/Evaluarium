@@ -22,7 +22,26 @@
 #
 class EvaluationProgram < ApplicationRecord
   MAXIMUM_VALID_SCORE = 100
-  AVAILABLE_STEP_SIZES = [0.5, 1, 5, 10]
+  AVAILABLE_STEP_SIZES = [0.5, 1, 5, 10].freeze
+
+  enum program_type: {
+    project_follow_up: 0,
+    competition: 1
+  }
+
+  enum score_calculation_method: {
+    take_latest: 0,
+    take_average: 1
+  }
+
+  enum calculation_inclusion_unit: {
+    minutes: 0,
+    hours: 1,
+    days: 2,
+    weeks: 3,
+    months: 4,
+    score_entries: 5
+  }
 
   has_many :project_evaluation_summaries
   has_many :program_criteria

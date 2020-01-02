@@ -19,7 +19,7 @@
 require 'rails_helper'
 
 RSpec.describe ProjectEvaluationSummary, type: :model do
-  subject { build_stubbed(:project_evaluation_summary) }
+  subject { create(:project_evaluation_summary) }
 
   it { should belong_to(:project) }
   it { should belong_to(:evaluation_program) }
@@ -28,5 +28,18 @@ RSpec.describe ProjectEvaluationSummary, type: :model do
     should(validate_numericality_of(:total_score)
               .is_less_than_or_equal_to(EvaluationProgram::MAXIMUM_VALID_SCORE)
               .is_greater_than_or_equal_to(0))
+  end
+
+  context 'validating evaluator uniqueness' do
+    it 'should NOT enforce uniqueness if the EvaluationProgram is a "project follow up"' do
+      clone = subject.dup
+      expect(clone).to be_valid
+    end
+
+    it 'should enforce uniqueness if the EvaluationProgram is a "competition"' do
+      subject.evaluation_program.update(program_type: :competition)
+      clone = subject.dup
+      expect(clone).not_to be_valid
+    end
   end
 end

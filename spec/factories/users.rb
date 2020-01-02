@@ -38,9 +38,15 @@ FactoryBot.define do
     password_confirmation { '12345678' }
     created_at { Date.today }
 
-    trait :superadmin do
-      after :create do |user|
-        user.add_role :superadmin
+    trait :with_roles do
+      transient do
+        roles { [{ name: nil, resource: nil }] }
+      end
+
+      after :create do |user, eval|
+        eval.roles.each do |role|
+          user.add_role role[:name].to_sym, role[:resource]
+        end
       end
     end
   end

@@ -44,9 +44,13 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
   end
 
   create_table "evaluation_programs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_at"
+    t.string "name", null: false
+    t.datetime "start_at", default: -> { "now()" }, null: false
     t.datetime "end_at"
+    t.integer "program_type", default: 0, null: false
+    t.integer "score_calculation_method", null: false
+    t.integer "calculation_inclusion_count"
+    t.integer "calculation_inclusion_unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "criteria_scale_max", null: false
@@ -80,11 +84,13 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
     t.bigint "evaluation_program_id", null: false
     t.bigint "project_id", null: false
     t.date "program_start"
+    t.bigint "evaluator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "timestamp"
     t.jsonb "scores", default: {}
     t.index ["evaluation_program_id"], name: "index_project_evaluation_summaries_on_evaluation_program_id"
+    t.index ["evaluator_id"], name: "index_project_evaluation_summaries_on_evaluator_id"
     t.index ["project_id"], name: "index_project_evaluation_summaries_on_project_id"
   end
 
@@ -147,4 +153,5 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
   add_foreign_key "program_criteria", "evaluation_programs"
   add_foreign_key "project_evaluation_summaries", "evaluation_programs"
   add_foreign_key "project_evaluation_summaries", "projects"
+  add_foreign_key "project_evaluation_summaries", "users", column: "evaluator_id"
 end

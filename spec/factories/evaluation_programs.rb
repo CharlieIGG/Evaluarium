@@ -23,5 +23,8 @@ FactoryBot.define do
     criteria_step_size { 1 }
     start_at { '2019-11-13 01:04:14' }
     end_at { '2019-11-13 01:04:14' }
+    program_type { :project_follow_up }
+    score_calculation_method { :take_latest }
+    calculation_inclusion_unit { nil }
   end
 end
