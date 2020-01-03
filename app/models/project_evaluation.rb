@@ -8,12 +8,10 @@
 #  total_score           :float            default(0.0)
 #  evaluation_program_id :bigint           not null
 #  project_id            :bigint           not null
-#  program_start         :date
 #  evaluator_id          :bigint           not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  timestamp             :datetime
-#  scores                :jsonb
 #
 
 #

@@ -19,7 +19,7 @@ class ProjectProgramSummaryUpdater
     @type = @summary.program_type
   end
 
-  def update
+  def run
     update_summary_scores
     update_total_score
   end

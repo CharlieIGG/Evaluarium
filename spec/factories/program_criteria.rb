@@ -15,9 +15,12 @@
 
 FactoryBot.define do
   factory :program_criterium do
-    evaluation_program
+    transient do
+      maximum { 5 }
+    end
+    evaluation_program { create(:evaluation_program, criteria_scale_max: maximum) }
     evaluation_criterium
     position { 1 }
-    weight { 1.5 }
+    weight { 10 }
   end
 end
