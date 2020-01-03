@@ -42,7 +42,7 @@ RSpec.describe EvaluationScore, type: :model do
     let(:criterium_weight) { 20 }
     let(:test_score) { create(:evaluation_score, evaluation_program: evaluation_program, criterium_weight: criterium_weight) }
     context 'on save' do
-      it 'should calculate its own weighted_total correctly', focus: true do
+      it 'should calculate its own weighted_total correctly' do
         test_score.total = 100
         test_score.save!
         expect(test_score.reload.weighed_total).to eq(criterium_weight)

@@ -11,20 +11,20 @@ RSpec.describe ProjectProgramSummaryUpdater do
   context 'for follow-up programs' do
     let(:score_count) { 5 }
     let(:total_score) { 80 }
-    before(:all) do
-      create(:project_evaluation, :with_homogeneous_scores, score_count: score_count, total_score: total_score, project: project, evaluation_program: evaluation_program)
-      subject.run
-    end
+    let_it_be(:evaluation) { create(:project_evaluation, :with_homogeneous_scores, score_count: score_count, total_score: total_score, project: project, evaluation_program: evaluation_program) }
+
     it 'calculates average_score correctly' do
+      subject.run
       expect(summary.average_score).to be(total_score)
     end
-    evaluation_program.program_criteria.each do |criteria|
-      it "sets the scores_summary[:criteria][:#{criteria.name}] correctly" do
+    it 'sets the scores_summary[:criteria][:criteria_name] correctly' do
+      subject.run
+      evaluation_program.program_criteria.each do |criteria|
         expect(summary.scores_summary[:criteria][criteria.name.to_sym]).to eq(total_score/score_count)
       end
     end
   end
-  context 'for follow-up programs' do
+  context 'for competition programs' do
     it 'calculates average_score correctly' do
       pending 'FINISH ME 🙏'
       expect(false).to be(true)
