@@ -6,9 +6,9 @@
 #
 class ProjectProgramSummaryUpdater
   PROGRAM_TYPE_METHODS = {
-    project_follow_up: :take_latest_scores,
-    competition: :take_average_scores
-  }.freeze
+    project_follow_up: :take_latest_evaluation,
+    competition: :take_all_evaluations
+  }.with_indifferent_access
 
   def initialize(project_id, evaluation_program_id)
     @summary = ProjectProgramSummary.find_by(
@@ -20,23 +20,59 @@ class ProjectProgramSummaryUpdater
   end
 
   def run
-    update_summary_scores
-    update_total_score
+    assign_summary_scores
+    assign_average_score
+    @summary.save!
   end
 
   private
 
-  def update_summary_scores; end
-
-  def update_total_score; end
-
-  def scores
-    send(PROGRAM_TYPE_METHODS[@type])
+  def assign_summary_scores
+    @summary.scores_summary['evaluation_count'] = evaluations.count
+    @summary.scores_summary['criteria'] = generate_criteria_summary
   end
 
-  def take_latest_score
-    @summary.evaluation_scores
+  def assign_average_score
+    @summary.average_score = evaluations.average(:total_score)
   end
 
-  def take_average_scores; end
+  def evaluations
+    @evaluations ||= send(PROGRAM_TYPE_METHODS[@type])
+  end
+
+  def take_latest_evaluation
+    @summary.project_evaluations.order(timestamp: :desc).limit(1)
+  end
+
+  def take_all_evaluations
+    @summary.project_evaluations
+  end
+
+  def generate_criteria_summary
+    sql = <<-SQL
+      SELECT
+        evaluation_criteria.name,
+        program_criteria.weight,
+        evaluation_programs.criteria_scale_max AS maximum,
+        evaluation_programs.criteria_scale_min AS minimum,
+        AVG(evaluation_scores.total) AS total,
+        AVG(evaluation_scores.weighed_total) AS weighed_total
+      FROM evaluation_scores
+      LEFT JOIN program_criteria
+        ON evaluation_scores.program_criterium_id =  program_criteria.id
+      LEFT JOIN evaluation_programs
+        ON program_criteria.evaluation_program_id = evaluation_programs.id
+      LEFT JOIN evaluation_criteria
+        ON program_criteria.evaluation_criterium_id = evaluation_criteria.id
+      WHERE evaluation_scores.project_evaluation_id IN (#{evaluations.pluck(:id).join(', ')})
+      GROUP BY
+        evaluation_criteria.name, program_criteria.weight,
+        evaluation_programs.criteria_scale_max,
+        evaluation_programs.criteria_scale_min
+      ORDER BY
+        evaluation_criteria.name
+    SQL
+    scores = EvaluationScore.connection.execute(sql).to_a
+    scores.inject({}) { |hash, score| hash.merge(score['name'] => score) }
+  end
 end

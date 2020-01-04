@@ -9,18 +9,19 @@ RSpec.describe ProjectProgramSummaryUpdater do
   subject { ProjectProgramSummaryUpdater.new(project.id, evaluation_program.id) }
 
   context 'for follow-up programs' do
-    let(:score_count) { 5 }
-    let(:total_score) { 80 }
+    let_it_be(:score_count) { 5 }
+    let_it_be(:total_score) { 80.0 }
     let_it_be(:evaluation) { create(:project_evaluation, :with_homogeneous_scores, score_count: score_count, total_score: total_score, project: project, evaluation_program: evaluation_program) }
 
     it 'calculates average_score correctly' do
       subject.run
-      expect(summary.average_score).to be(total_score)
+      expect(summary.reload.average_score).to be(total_score)
     end
-    it 'sets the scores_summary[:criteria][:criteria_name] correctly' do
+    it 'sets the scores_summary[:criteria][:criteria_name] correctly', focus: true do
       subject.run
       evaluation_program.program_criteria.each do |criteria|
-        expect(summary.scores_summary[:criteria][criteria.name.to_sym]).to eq(total_score/score_count)
+        criterium = summary.reload.scores_summary['criteria'][criteria.name]
+        expect(criterium['total']).to eq(total_score * score_count / 100)
       end
     end
   end

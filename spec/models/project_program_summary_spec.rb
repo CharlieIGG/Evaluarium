@@ -22,7 +22,6 @@ RSpec.describe ProjectProgramSummary, type: :model do
 
   it { should belong_to(:project) }
   it { should belong_to(:evaluation_program) }
-  it { should have_many(:project_evaluations) }
   it { should validate_uniqueness_of(:project_id).scoped_to(:evaluation_program_id) }
   it do
     should(validate_numericality_of(:average_score)

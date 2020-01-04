@@ -30,7 +30,7 @@ FactoryBot.define do
         program = evaluation.evaluation_program
         create_list(:evaluation_score, transients.score_count,
                     project_evaluation: evaluation,
-                    evaluation_program: program, criterium_weight: 100 / score_count,
+                    evaluation_program: program, criterium_weight: 100 / transients.score_count,
                     total: evaluation.total_score * program.criteria_scale_max / 100)
       end
     end
