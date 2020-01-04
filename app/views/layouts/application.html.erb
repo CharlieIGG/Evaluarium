@@ -12,9 +12,12 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_pack_tag 'application' %>
     <%= javascript_pack_tag 'application'%>
+    <%= javascript_pack_tag 'hello_erb'%>
+    <%= yield :stylesheets %>
     <%= yield :stylesheets %>
   </head>
   <body>
+    <%= render 'layouts/navbar' %>
     <%= yield %>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>

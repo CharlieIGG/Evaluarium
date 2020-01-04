@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Evaluation Criteria</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @evaluation_criteria.each do |evaluation_criterium| %>
+      <tr>
+        <td><%= link_to 'Show', evaluation_criterium %></td>
+        <td><%= link_to 'Edit', edit_evaluation_criterium_path(evaluation_criterium) %></td>
+        <td><%= link_to 'Destroy', evaluation_criterium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Evaluation Criterium', new_evaluation_criterium_path %>
