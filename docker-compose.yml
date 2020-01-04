@@ -24,6 +24,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - backend
+    ports:
+      - ${PG_PORT:-5432}:5432
     environment:
       POSTGRES_PASSWORD: 3x4mpl3P455w0rd
   # Where are the rest of the app services? (i.e. test, worker, web, etc)

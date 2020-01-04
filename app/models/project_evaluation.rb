@@ -30,7 +30,7 @@ class ProjectEvaluation < ApplicationRecord
                             greater_than_or_equal_to: 0
 
   def recalculate_total_score
-    self.total_score = calculate_total_score
+    self.total_score = evaluation_scores.sum(:weighed_total)
     total_score
   end
 
@@ -38,15 +38,9 @@ class ProjectEvaluation < ApplicationRecord
     update(total_score: recalculate_total_score)
   end
 
-  def calculate_total_score
-    return 0 unless scores.count.positive?
-
-    scores.map { |_k, score| score[:weighed_points] }.compact.sum
-  end
-
   def enforce_evaluator_uniqueness?
     return false unless evaluation_program.present?
 
     evaluation_program.competition?
-end
+  end
 end
