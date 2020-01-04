@@ -174,12 +174,12 @@ CMD [ "puma" ]
 ARG SOURCE_BRANCH="master"
 ARG SOURCE_COMMIT="000000"
 ARG BUILD_DATE="2017-09-26T16:13:26Z"
-ARG IMAGE_NAME="startupapp:latest"
+ARG IMAGE_NAME="evaluarium:latest"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
-  org.label-schema.name="Startup Evaluation App" \
-  org.label-schema.description="startupapp" \
-  org.label-schema.vcs-url="https://github.com/charlieigg/startupapp.git" \
+  org.label-schema.name="Evaluarium" \
+  org.label-schema.description="evaluarium" \
+  org.label-schema.vcs-url="https://github.com/charlieigg/evaluarium.git" \
   org.label-schema.vcs-ref=$SOURCE_COMMIT \
   org.label-schema.schema-version="1.0.0-rc1" \
   build-target="release" \

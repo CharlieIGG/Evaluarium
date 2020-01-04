@@ -1,15 +1,21 @@
-# STARTUPAPP
+# EVALUARIUM
 
-![](https://github.com/CharlieIGG/startupapp/workflows/specs/badge.svg)
+![](https://github.com/CharlieIGG/evaluarium/workflows/specs/badge.svg)
 
-Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and other kinds of public and private scenarios for evaluating startups.
+Evaluating Projects is easy in a lot of cases, but when it comes down to projects where the evaluation
+is rather qualitative, things get messy.
+
+Evaluarium is an open-source, self-hosted platform for managing Projects in the context of Evaluation Programs.
+It can be used for voting panels in Hackathons and/or Admission Comittes, or even to keep up with a Venture Capital portfolio.
+
+Typical use-cases are Startup Incubators, Accelerators, Hackathons, and other such scenarios where projects get evaluated in any matter that has a degree of "qualitativeness", as opposed to projects that can be very easily normalized and analyzed in a purely numerical manner (e.g. Real Estate development).
 
 ## Table of contents
 
-- [STARTUPAPP](#startupapp)
+- [EVALUARIUM](#evaluarium)
   - [Table of contents](#table-of-contents)
     - [Environment URLS](#environment-urls)
-    - [Da team](#da-team)
+    - [The team](#the-team)
     - [Management tools](#management-tools)
   - [Development](#development)
     - [Setup the project](#setup-the-project)
@@ -21,23 +27,24 @@ Startup Evaluation App. For Startup Incubators, Accelerators, Hackathons, and ot
       - [TestProf](#testprof)
     - [Analyzing code for issues](#analyzing-code-for-issues)
   - [Deploying](#deploying)
+  - [Contributing](#contributing)
 
 ### Environment URLS
 
 - **Production** - TBD
 - **Staging** - TBD
 
-### Da team
+### The team
 
-| Name             | Email                 | Role        |
-| ---------------- | --------------------- | ----------- |
-| Carlos I. Garcia | charlie.igg@gmail.com | Development |
+| Name             | Email                 | Role               |
+| ---------------- | --------------------- | ------------------ |
+| Carlos I. Garcia | charlie.igg@gmail.com | Development, Owner |
 
 ### Management tools
 
 You should ask for access to this tools if you don't have it already:
 
-- [Github repo](https://github.com/charlieigg/STARTUPAPP)
+- [Github repo](https://github.com/charlieigg/EVALUARIUM)
 - [Pivotal tracker project](https://www.pivotaltracker.com/)
 - [Client Slack](https://change-me.slack.com/)
 - [Heroku](https://heroku.com)
@@ -60,14 +67,14 @@ After installing please you can follow this simple steps:
 1. Clone this repository into your local machine
 
 ```bash
-$ git clone git@github.com:charlieigg/startupapp.git
+$ git clone git@github.com:charlieigg/evaluarium.git
 
 ```
 
 2. Copy the `example.env` file to `.env` in the project's source directory.
 
 ```bash
-$ cd startupapp
+$ cd evaluarium
 $ cp example.env .env
 ```
 
@@ -112,7 +119,7 @@ docker-compose:
 $ docker-compose up
 ```
 
-That command will lift every service STARTUPAPP needs, such as the `rails server`, `postgres`, and `redis`.
+That command will lift every service EVALUARIUM needs, such as the `rails server`, `postgres`, and `redis`.
 
 It may take a while before you see anything, you can follow the logs of the containers with:
 
@@ -134,7 +141,7 @@ This means the project is up and running.
 
 ### Stop the project
 
-In order to stop STARTUPAPP as a whole you can run:
+In order to stop EVALUARIUM as a whole you can run:
 
 ```
 % plis stop
@@ -150,7 +157,7 @@ This will stop every container, but if you need to stop one in particular, you c
 
 ### Restoring the database
 
-You probably won't be working with a blank database, so once you are able to run STARTUPAPP you can restore the database, to do it, first stop all services:
+You probably won't be working with a blank database, so once you are able to run EVALUARIUM you can restore the database, to do it, first stop all services:
 
 ```
 % plis stop
@@ -165,15 +172,15 @@ Then just lift up the `db` service:
 The next step is to login to the database container:
 
 ```
-% docker exec -ti startupapp_db_1 bash
+% docker exec -ti evaluarium_db_1 bash
 ```
 
 This will open up a bash session in to the database container.
 
-Up to this point we just need to download a database dump and copy under `STARTUPAPP/backups/`, this directory is mounted on the container, so you will be able to restore it with:
+Up to this point we just need to download a database dump and copy under `EVALUARIUM/backups/`, this directory is mounted on the container, so you will be able to restore it with:
 
 ```
-root@a3f695b39869:/# bin/restoredb startupapp_dev db/backups/<databaseDump>
+root@a3f695b39869:/# bin/restoredb evaluarium_dev db/backups/<databaseDump>
 ```
 
 If you want to see how this script works, you can find it under `bin/restoredb`
@@ -242,3 +249,8 @@ If you have previously run the `./bin/setup` script,
 you can deploy to staging and production with:
 % ./bin/deploy staging
 % ./bin/deploy production
+
+## Contributing
+
+Feel free to create forks + pull requests for this project with new features and bug-fixes.
+If you're wanting to implement a functionallity that is very specific to your use case or industry, it should be added in a modular way (as an opt-in feature).

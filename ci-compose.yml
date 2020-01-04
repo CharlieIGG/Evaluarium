@@ -28,7 +28,7 @@ services:
       - backend
     command: rspec
     environment:
-      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/startupapp_test
+      DATABASE_URL: postgres://postgres:3x4mpl3P455w0rd@postgres:5432/evaluarium_test
       RAILS_ENV: test
       RACK_ENV: test
       MAILER_HOST: localhost
@@ -56,7 +56,7 @@ services:
         SOURCE_BRANCH: ${GIT_BRANCH}
         SOURCE_COMMIT: ${GIT_SHA}
         BUILD_DATE: ${BUILD_DATE}
-        IMAGE_NAME: "charlieigg/startupapp"
+        IMAGE_NAME: "charlieigg/evaluarium"
       cache_from:
         - ${ECR_URL}:${GIT_SHORT_SHA:-latest}
         - ${ECR_URL}:builder-${GIT_SHORT_SHA:-latest}

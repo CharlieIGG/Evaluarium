@@ -30,7 +30,7 @@ blocks:
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
-            - mkdir -p startupapp && cd startupapp
+            - mkdir -p evaluarium && cd evaluarium
 
             # Generate the 'web' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.web
@@ -40,10 +40,10 @@ blocks:
             - echo 'CMD [ "rails", "release" ]' >> Dockerfile.release
 
             # Push the images to staging:
-            - heroku container:push --recursive --app startupapp-staging
+            - heroku container:push --recursive --app evaluarium-staging
 
             # Release the images to staging:
-            - heroku container:release web release --app startupapp-staging
+            - heroku container:release web release --app evaluarium-staging
 
   - name: Production Deploy
     task:
@@ -67,7 +67,7 @@ blocks:
 
             - docker pull ${RELEASE_IMAGE_TAG}
 
-            - mkdir -p startupapp && cd startupapp
+            - mkdir -p evaluarium && cd evaluarium
 
             # Generate the 'web' Dockerfile:
             - echo "FROM ${RELEASE_IMAGE_TAG}" >> Dockerfile.web
@@ -77,7 +77,7 @@ blocks:
             - echo 'CMD [ "rails", "release" ]' >> Dockerfile.release
 
             # Push the images to production:
-            - heroku container:push --recursive --app startupapp-production
+            - heroku container:push --recursive --app evaluarium-production
 
             # Release the images to production:
-            - heroku container:release web release --app startupapp-production
+            - heroku container:release web release --app evaluarium-production

@@ -4,8 +4,8 @@
 # This is a script used by the project's Docker development environment to
 # setup development buckets:.
 
-# 1: Create the 'startupapp' bucket:
-mkdir -p /data/startupapp
+# 1: Create the 'evaluarium' bucket:
+mkdir -p /data/evaluarium
 
 # 2: Invoke the original entrypoint:
 exec /usr/bin/docker-entrypoint.sh "$@"

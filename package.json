@@ -1,5 +1,5 @@
 {
-    "name": "STARTUPAPP",
+    "name": "EVALUARIUM",
     "private": true,
     "dependencies": {
         "@rails/activestorage": "^6.0.2-1",

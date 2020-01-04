@@ -1,10 +1,10 @@
-## How to contribute to STARTUPAPP
+## How to contribute to EVALUARIUM
 
 #### **Did you find a bug?**
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/charlieigg/startupapp/issues).
+* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/charlieigg/evaluarium/issues).
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/charlieigg/startupapp/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring. Also add a `bug` tag to it.
+* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/charlieigg/evaluarium/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring. Also add a `bug` tag to it.
 
 #### **Are you ready to place a pull request?**
 
@@ -19,7 +19,7 @@
 
 #### **Did you fix whitespace, format code, or make a purely cosmetic patch?**
 
-For changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of STARTUPAPP, just add a title tag of `[COSMETIC]` and assign the code reviewer.
+For changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of EVALUARIUM, just add a title tag of `[COSMETIC]` and assign the code reviewer.
 
 #### **Do you have questions about the source code?**
 

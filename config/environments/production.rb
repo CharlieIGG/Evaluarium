@@ -63,7 +63,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "STARTUPAPP_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "EVALUARIUM_#{Rails.env}"
   # Use a real queuing backend for Active Job (and separate queues per environment)
   config.active_job.queue_adapter = :sidekiq
 
@@ -83,7 +83,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
-    domain: 'startupapp.com',
+    domain: 'evaluarium.com',
     address: 'smtp.sendgrid.net',
     port: 587,
     authentication: :plain,
@@ -114,5 +114,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.middleware.use Rack::Deflater
   config.force_ssl = true
-  config.middleware.use Rack::CanonicalHost, ENV.fetch('APPLICATION_HOST', 'startupapp.com')
+  config.middleware.use Rack::CanonicalHost, ENV.fetch('APPLICATION_HOST', 'evaluarium.com')
 end

@@ -2,7 +2,7 @@
 
 # For use on the postgres container only.
 # Usage:
-# bin/restoredb startupapp_dev db/dumps/<your-dump-name>
+# bin/restoredb evaluarium_dev db/dumps/<your-dump-name>
 set -e
 
 : ${DB_NAME:=$1}
