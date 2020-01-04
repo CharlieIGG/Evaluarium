@@ -5,9 +5,10 @@
 # Table name: evaluation_programs
 #
 #  id                 :bigint           not null, primary key
-#  name               :string
-#  start_at           :datetime
+#  name               :string           not null
+#  start_at           :datetime         not null
 #  end_at             :datetime
+#  program_type       :integer          default("project_follow_up"), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  criteria_scale_max :float            not null
@@ -23,5 +24,6 @@ FactoryBot.define do
     criteria_step_size { 1 }
     start_at { '2019-11-13 01:04:14' }
     end_at { '2019-11-13 01:04:14' }
+    program_type { :project_follow_up }
   end
 end

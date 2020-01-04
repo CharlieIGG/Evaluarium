@@ -11,11 +11,11 @@
 #  updated_at :datetime         not null
 #
 
-
 #
 # Projects to evaluate, these might be Startups or something similar
 #
 class Project < ApplicationRecord
-  has_many :project_evaluation_summaries
-  has_many :evaluation_programs, through: :project_evaluation_summaries
+  has_many :project_evaluations
+  has_many :project_program_summaries
+  has_many :evaluation_programs, through: :project_program_summaries
 end

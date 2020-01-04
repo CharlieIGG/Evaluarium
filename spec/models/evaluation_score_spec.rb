@@ -4,24 +4,24 @@
 #
 # Table name: evaluation_scores
 #
-#  id                            :bigint           not null, primary key
-#  program_criterium_id          :bigint           not null
-#  project_evaluation_summary_id :bigint           not null
-#  total                         :float
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
+#  id                    :bigint           not null, primary key
+#  program_criterium_id  :bigint           not null
+#  project_evaluation_id :bigint           not null
+#  total                 :float            default(0.0), not null
+#  weighed_total         :float            default(0.0), not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
-
 
 require 'rails_helper'
 
 RSpec.describe EvaluationScore, type: :model do
   subject { create(:evaluation_score) }
-  it { should belong_to :project_evaluation_summary }
+  it { should belong_to :project_evaluation }
   it { should belong_to :program_criterium }
   it { should have_one :evaluation_program }
 
-  it { should validate_uniqueness_of(:program_criterium_id).scoped_to(:project_evaluation_summary_id) }
+  it { should validate_uniqueness_of(:program_criterium_id).scoped_to(:project_evaluation_id) }
 
   context 'validating numericality dynamically' do
     it 'is invalid if the total is outside of the EvaluationProgram\'s criteria_scale' do
@@ -38,66 +38,17 @@ RSpec.describe EvaluationScore, type: :model do
   end
 
   context 'lifecycle hooks' do
-    let_it_be(:program) { create_default(:evaluation_program, criteria_scale_max: 100) }
-    let_it_be(:project_evaluation_summary, reload: true) { create(:project_evaluation_summary, evaluation_program: program) }
-    let_it_be(:weight) { 100 }
-    let_it_be(:program_criterium) { create(:program_criterium, weight: weight, evaluation_program: program) }
-
-    context 'on create' do
-      it 'triggers a reevaluation of the Summarys total_score' do
-        expect(project_evaluation_summary.total_score).to eq(0)
-
-        create(:evaluation_score, total: 70, program_criterium: program_criterium, project_evaluation_summary: project_evaluation_summary)
-
-        expect(project_evaluation_summary.reload.total_score).to eq(70)
-      end
-
-      it 'triggers an update of the Summarys scores' do
-        expect(project_evaluation_summary.scores).to eq({})
-
-        score = create(:evaluation_score, total: 70, program_criterium: program_criterium, project_evaluation_summary: project_evaluation_summary)
-
-        expect(project_evaluation_summary.scores[score.name]).to eq(score.score_summary)
-      end
-    end
-
-    context 'on update' do
-      let!(:score) { create(:evaluation_score, total: 70, program_criterium: program_criterium, project_evaluation_summary: project_evaluation_summary) }
-
-      it 'triggers a reevaluation of the Summarys total_score' do
-        expect(project_evaluation_summary.total_score).to eq(70)
-
-        score.update(total: 80)
-
-        expect(project_evaluation_summary.reload.total_score).to eq(80)
-      end
-
-      it 'triggers an update of the Summarys scores' do
-        expect(project_evaluation_summary.scores[score.name]).to eq(score.score_summary)
-
-        score.update(total: 80)
-
-        expect(project_evaluation_summary.scores[score.name]).to eq(score.score_summary)
-      end
-    end
-
-    context 'on destroy' do
-      let!(:score) { create(:evaluation_score, total: 70, program_criterium: program_criterium, project_evaluation_summary: project_evaluation_summary) }
-
-      it 'triggers a reevaluation of the Summarys total_score' do
-        expect(project_evaluation_summary.total_score).to eq(70)
-
-        score.destroy
-
-        expect(project_evaluation_summary.reload.total_score).to eq(0)
-      end
-
-      it 'triggers an update of the Summarys scores' do
-        expect(project_evaluation_summary.scores[score.name]).to eq(score.score_summary)
-
-        score.destroy
-
-        expect(project_evaluation_summary.scores[score.name]['weighed_points']).to eq(0)
+    let(:evaluation_program) { create(:evaluation_program, criteria_scale_max: 100) }
+    let(:criterium_weight) { 20 }
+    let(:test_score) { create(:evaluation_score, evaluation_program: evaluation_program, criterium_weight: criterium_weight) }
+    context 'on save' do
+      it 'should calculate its own weighted_total correctly' do
+        test_score.total = 100
+        test_score.save!
+        expect(test_score.reload.weighed_total).to eq(criterium_weight)
+        test_score.total = 50
+        test_score.save!
+        expect(test_score.reload.weighed_total).to eq(0.5 * criterium_weight)
       end
     end
   end

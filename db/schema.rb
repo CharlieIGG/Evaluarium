@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_01_122316) do
+ActiveRecord::Schema.define(version: 2020_01_02_223447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,10 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
   end
 
   create_table "evaluation_programs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_at"
+    t.string "name", null: false
+    t.datetime "start_at", default: -> { "now()" }, null: false
     t.datetime "end_at"
+    t.integer "program_type", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "criteria_scale_max", null: false
@@ -56,12 +57,13 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
 
   create_table "evaluation_scores", force: :cascade do |t|
     t.bigint "program_criterium_id", null: false
-    t.bigint "project_evaluation_summary_id", null: false
-    t.float "total"
+    t.bigint "project_evaluation_id", null: false
+    t.float "total", default: 0.0, null: false
+    t.float "weighed_total", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["program_criterium_id"], name: "index_evaluation_scores_on_program_criterium_id"
-    t.index ["project_evaluation_summary_id"], name: "index_evaluation_scores_on_project_evaluation_summary_id"
+    t.index ["project_evaluation_id"], name: "index_evaluation_scores_on_project_evaluation_id"
   end
 
   create_table "program_criteria", force: :cascade do |t|
@@ -75,17 +77,29 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
     t.index ["evaluation_program_id"], name: "index_program_criteria_on_evaluation_program_id"
   end
 
-  create_table "project_evaluation_summaries", force: :cascade do |t|
+  create_table "project_evaluations", force: :cascade do |t|
     t.float "total_score", default: 0.0
     t.bigint "evaluation_program_id", null: false
     t.bigint "project_id", null: false
-    t.date "program_start"
+    t.bigint "evaluator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "timestamp"
-    t.jsonb "scores", default: {}
-    t.index ["evaluation_program_id"], name: "index_project_evaluation_summaries_on_evaluation_program_id"
-    t.index ["project_id"], name: "index_project_evaluation_summaries_on_project_id"
+    t.index ["evaluation_program_id"], name: "index_project_evaluations_on_evaluation_program_id"
+    t.index ["evaluator_id"], name: "index_project_evaluations_on_evaluator_id"
+    t.index ["project_id"], name: "index_project_evaluations_on_project_id"
+  end
+
+  create_table "project_program_summaries", force: :cascade do |t|
+    t.float "average_score", default: 0.0, null: false
+    t.float "latest_increase_percent"
+    t.bigint "evaluation_program_id", null: false
+    t.bigint "project_id", null: false
+    t.jsonb "scores_summary", default: {}, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evaluation_program_id"], name: "index_project_program_summaries_on_evaluation_program_id"
+    t.index ["project_id"], name: "index_project_program_summaries_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -142,9 +156,12 @@ ActiveRecord::Schema.define(version: 2020_01_01_122316) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "evaluation_scores", "program_criteria"
-  add_foreign_key "evaluation_scores", "project_evaluation_summaries"
+  add_foreign_key "evaluation_scores", "project_evaluations"
   add_foreign_key "program_criteria", "evaluation_criteria"
   add_foreign_key "program_criteria", "evaluation_programs"
-  add_foreign_key "project_evaluation_summaries", "evaluation_programs"
-  add_foreign_key "project_evaluation_summaries", "projects"
+  add_foreign_key "project_evaluations", "evaluation_programs"
+  add_foreign_key "project_evaluations", "projects"
+  add_foreign_key "project_evaluations", "users", column: "evaluator_id"
+  add_foreign_key "project_program_summaries", "evaluation_programs"
+  add_foreign_key "project_program_summaries", "projects"
 end

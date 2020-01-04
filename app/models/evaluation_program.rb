@@ -5,9 +5,10 @@
 # Table name: evaluation_programs
 #
 #  id                 :bigint           not null, primary key
-#  name               :string
-#  start_at           :datetime
+#  name               :string           not null
+#  start_at           :datetime         not null
 #  end_at             :datetime
+#  program_type       :integer          default("project_follow_up"), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  criteria_scale_max :float            not null
@@ -15,18 +16,22 @@
 #  criteria_step_size :float            default(1.0), not null
 #
 
-
 #
 # A wrapper for evaluations. A project (Startup) might be part of several
 # EvaluationPrograms, some lasting hours, some lasting months, and each with different evaluators
 #
 class EvaluationProgram < ApplicationRecord
   MAXIMUM_VALID_SCORE = 100
-  AVAILABLE_STEP_SIZES = [0.5, 1, 5, 10]
+  AVAILABLE_STEP_SIZES = [0.5, 1, 5, 10].freeze
 
-  has_many :project_evaluation_summaries
+  enum program_type: {
+    project_follow_up: 0,
+    competition: 1
+  }
+
+  has_many :project_evaluations
   has_many :program_criteria
-  has_many :projects, through: :project_evaluation_summaries
+  has_many :projects, through: :project_evaluations
   has_many :evaluation_criteria, through: :program_criteria
 
   validates :name, uniqueness: true, presence: true
