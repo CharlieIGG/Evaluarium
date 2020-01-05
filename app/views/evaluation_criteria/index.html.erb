@@ -11,11 +11,16 @@
   </div>
   <p id="notice"><%= notice %></p>
   <div class="card-columns">
-    <div class="card border-primary mb-3" style="max-width: 18rem;">
-      <div class="card-header text-primary font-weight-bold">Header</div>
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <% @evaluation_criteria.each do |criterion| %>
+      <div class="card border-primary mb-3">
+        <div class="card-header text-primary font-weight-bold"><%= criterion.name %></div>
+        <div class="card-body">
+          <p class="card-text"><%= criterion.short_description %></p>
+          <div class="text-right">
+            <%= link_to t('controllers.actions.edit').titleize, edit_evaluation_criterium_path(criterion), class: "btn btn-outline-primary" %>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

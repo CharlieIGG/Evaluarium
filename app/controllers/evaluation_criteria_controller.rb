@@ -7,8 +7,7 @@ class EvaluationCriteriaController < ApplicationController
 
   # GET /evaluation_criteria
   def index
-    @name = 'NAME'
-    @evaluation_criteria = EvaluationCriterium.all
+    @evaluation_criteria = EvaluationCriterium.order(:name).all.decorate
   end
 
   # GET /evaluation_criteria/1
