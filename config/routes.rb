@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, except: %i[show]
-  resources :evaluation_criteria
+  resources :evaluation_criteria, except: %i[show]
 
   root to: 'evaluation_criteria#index'
   get 'landing', to: 'landing#index'

@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center justify-content-between">
+  <div class="pr-5">
+    <h1 class="d-flex align-items-center">
+      <%= title %>
+      <% if local_assigns[:icon_name] %>
+        <i class="ml-3 text-primary" data-feather="<%= icon_name %>"></i>
+      <% end %>
+    </h1>
+    <% if local_assigns[:explanation] %>
+      <p class="text-muted"><%= explanation %></p>
+    <% end %>
+  </div>
+  <div>
+    <% if local_assigns[:cta_button] %>
+      <%= cta_button %>
+    <% end %>
+  </div>
+</div>

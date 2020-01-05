@@ -1,0 +1,14 @@
+$label-height: 0.7rem;
+
+label {
+  font-weight: 600;
+  color: $gray-600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-size: $label-height;
+
+  svg {
+    width: $label-height;
+    margin-bottom: calc(#{$label-height} / 2);
+  }
+}

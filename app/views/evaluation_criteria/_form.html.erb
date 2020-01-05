@@ -1,17 +1,51 @@
-<%= form_with(model: evaluation_criterium, local: true) do |form| %>
-  <% if evaluation_criterium.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(evaluation_criterium.errors.count, "error") %> prohibited this evaluation_criterium from being saved:</h2>
-
-      <ul>
-        <% evaluation_criterium.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= javascript_pack_tag 'action_text' %>
+<%= form_with(model: evaluation_criterium.object, local: true) do |form| %>
+  <div class="container-fluid px-5">
+    <div class="container-fluid px-5">
+      <%= render 'shared/common_header', title: evaluation_criterium.new_edit_title,
+                                         icon_name: "edit-3",
+                                         cta_button: (
+                                            form.submit class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap mb-3"
+                                          )
+                                        %>
+      <div class="card border-primary mb-3">
+        <div class="card-body">
+          <% if evaluation_criterium.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(evaluation_criterium.errors.count, "error") %> prohibited this evaluation_criterium from being saved:</h2>
+              <ul>
+                <% evaluation_criterium.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <%= form.label :name do %>
+              <%= EvaluationCriterium.human_attribute_name('name') %>
+              <%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.evaluation_criteria.name')%>
+            <% end %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :short_description do %>
+              <%= EvaluationCriterium.human_attribute_name('short_description') %>
+              <%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.evaluation_criteria.short_description') %>
+            <% end %>
+            <%= form.text_area :short_description, class: "form-control" %>
+          </div>
+          <%= form.label :description do %>
+            <%= EvaluationCriterium.human_attribute_name('description') %>
+            <%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.evaluation_criteria.description') %>
+          <% end %>
+          <%= form.rich_text_area :description %>
+        </div>
+      </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

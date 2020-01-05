@@ -1,19 +1,23 @@
 <div class="container-fluid px-5">
-  <div class="d-flex align-items-center justify-content-between">
-    <div class="pr-5">
-      <h1><%= EvaluationCriterium.model_name.human(count: 2) %></h1>
-      <p class="text-muted"><%= t('activerecord.models.evaluation_criterium.ui_description').html_safe %></p>
-    </div>
-    <div>
-      <%= link_to "New #{EvaluationCriterium.model_name.human}", new_evaluation_criterium_path,
-                                              class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap" %>
-    </div>
-  </div>
+  <%= render 'shared/common_header', title: EvaluationCriterium.model_name.human(count: 2),
+                                     icon_name: "check-circle",
+                                     explanation: t('activerecord.models.evaluation_criterium.ui_description').html_safe,
+                                     cta_button: (
+                                       link_to "New #{EvaluationCriterium.model_name.human}", new_evaluation_criterium_path,
+                                                class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap"
+                                      )
+                                    %>
   <p id="notice"><%= notice %></p>
   <div class="card-columns">
     <% @evaluation_criteria.each do |criterion| %>
       <div class="card border-primary mb-3">
-        <div class="card-header text-primary font-weight-bold"><%= criterion.name %></div>
+        <div class="card-header text-primary font-weight-bold d-flex justify-content-between">
+          <%= criterion.name %>
+          <%= render 'shared/popover_icon', icon_name: 'help-circle',
+                                            icon_class: 'ml-3 text-primary',
+                                            content: criterion.description_html,
+                                            html: true %>
+        </div>
         <div class="card-body">
           <p class="card-text"><%= criterion.short_description %></p>
           <div class="text-right">
