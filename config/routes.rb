@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     end
   end
   resources :users, except: %i[show]
+  resources :evaluation_criteria, except: %i[show]
+
   root to: 'landing#index'
+  get 'landing', to: 'landing#index'
+  get 'configuration', to: 'evaluation_criteria#index', as: :configuration
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

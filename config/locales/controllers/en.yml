@@ -5,3 +5,10 @@ en:
       successfully_created: "%{resource_name} successfully created"
       successfully_deleted: "%{resource_name} successfully deleted"
       successfully_saved: "%{resource_name} successfully saved"
+    actions:
+      new: new
+      edit: edit
+      create: create
+      update: update
+      destroy: destroy
+      delete: delete

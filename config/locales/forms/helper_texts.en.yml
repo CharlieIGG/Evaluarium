@@ -1,0 +1,6 @@
+en:
+  helper_texts:
+    evaluation_criteria:
+      name: The name of the criterion. This will be used as the primary label.
+      short_description: A one, or two sentence description. This will be shown by default.
+      description: A more thorough description. This will be shown to users who seek to understand more about this particular criterion.

@@ -4,11 +4,11 @@
 #
 # Table name: evaluation_criteria
 #
-#  id          :bigint           not null, primary key
-#  name        :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                :bigint           not null, primary key
+#  name              :string
+#  short_description :text
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 

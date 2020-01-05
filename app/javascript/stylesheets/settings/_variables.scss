@@ -392,8 +392,8 @@ $card-cap-bg: transparent !default;
 
 // Tooltips
 
-$tooltip-color: $black !default;
-$tooltip-bg: $gray-300 !default;
+$tooltip-color: $white !default;
+$tooltip-bg: $primary !default;
 $tooltip-opacity: 1 !default;
 
 $tooltip-arrow-color: $tooltip-bg !default;
@@ -401,10 +401,10 @@ $tooltip-arrow-color: $tooltip-bg !default;
 
 // Popovers
 
-$popover-bg: $white !default;
-$popover-max-width: 10rem !default;
-$popover-padding-x: .95rem !default;
-$popover-padding-y: .8rem !default;
+$popover-bg: $indigo !default;
+$popover-max-width: 25rem !default;
+$popover-padding-x: 1.5rem !default;
+$popover-padding-y: 1rem !default;
 $popover-box-shadow: 0 0 1rem transparentize($black, .97) !default;
 
 $popover-header-bg: $popover-bg !default;
@@ -412,7 +412,9 @@ $popover-header-padding-y: 0 !default;
 $popover-header-padding-x: 0 !default;
 $popover-header-margin-bottom: .25rem !default;
 
-$popover-body-color: $text-muted !default;
+$popover-body-color: $white !default;
+$popover-body-padding-x: 0.85rem !default;
+$popover-body-padding-y: 0.85rem !default;
 
 
 // Toasts

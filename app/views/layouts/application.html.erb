@@ -15,7 +15,11 @@
     <%= yield :stylesheets %>
   </head>
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    <div class="d-flex">
+      <%= render 'layouts/config_sidebar' if @config_section %>
+      <%= yield %>
+    </div>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>
       <script type="text/javascript">

@@ -1,11 +1,13 @@
-$(document).on('turbolinks:load', function () {
-  var wrap = $(window);
-  var button = $(".sticky-button");
-  if (button.length == 0) return;
+import $ from "jquery";
 
-  var buttonTop = button.offset().top;
-  var stick = function (e) {
-    var scrollTop = wrap.scrollTop();
+$(document).on("turbolinks:load", () => {
+  const wrap = $(window);
+  const button = $(".sticky-button");
+  if (button.length === 0) return;
+
+  const buttonTop = button.offset().top;
+  const stick = () => {
+    const scrollTop = wrap.scrollTop();
     if (scrollTop >= buttonTop) {
       button.addClass("sticky");
     } else {

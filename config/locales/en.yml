@@ -30,13 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  controller_actions:
-    new: new
-    edit: edit
-    create: create
-    update: update
-    destroy: destroy
-    delete: delete
   features:
     invites:
       email_helper_text: "An invitation to join the platform will be sent to this email."

@@ -11,4 +11,9 @@ class ApplicationDecorator < Draper::Decorator
   def unknown_string
     t('Unknown')
   end
+
+  def new_edit_title
+    action = object.persisted? ? t('controllers.actions.edit') : t('controllers.actions.new')
+    "#{action.titleize} #{object.model_name.human}"
+  end
 end
