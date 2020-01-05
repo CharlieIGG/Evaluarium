@@ -13,11 +13,13 @@
     <%= stylesheet_pack_tag 'application' %>
     <%= javascript_pack_tag 'application'%>
     <%= yield :stylesheets %>
-    <%= yield :stylesheets %>
   </head>
   <body>
     <%= render 'layouts/navbar' %>
-    <%= yield %>
+    <div class="d-flex">
+      <%= render 'layouts/config_sidebar' if @config_section %>
+      <%= yield %>
+    </div>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>
       <script type="text/javascript">

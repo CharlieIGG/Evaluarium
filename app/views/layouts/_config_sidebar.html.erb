@@ -1,0 +1,9 @@
+<div class="nav flex-column nav-pills ml-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <%= link_to EvaluationCriterium.model_name.human(count: 2), evaluation_criteria_path,
+                    class:"nav-link text-nowrap", data: {
+                      'path-matchers': ['.*evaluation_criteria.?']
+                    } %>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="navs.htm#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="navs.htm#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="navs.htm#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">Settings</a>
+</div>

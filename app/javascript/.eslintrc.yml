@@ -17,6 +17,7 @@ plugins:
   - import
   - prettier
 rules:
+  no-use-before-define: 0
   no-underscore-dangle: 0
   react/prop-types: off
   import/prefer-default-export: off # airbnb default: 'error'

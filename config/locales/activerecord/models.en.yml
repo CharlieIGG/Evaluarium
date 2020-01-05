@@ -4,3 +4,11 @@ en:
       user:
         one: "User"
         other: "Users"
+      evaluation_criterium:
+        one: "Evaluation Criterion"
+        other: "Evaluation Criteria"
+        ui_description: Here you can manage any subjects (criteria) that could
+          ever be used for evaluating a Project. <br>
+          You can assign any criteria from this catalogue (along with a program-specific weight)
+          to any specific Evaluation Program, in order to have every evaluation in that Program
+          be made using the selected criteria.

@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 class EvaluationCriteriaController < ApplicationController
-  before_action :set_evaluation_criterium, only: [:show, :edit, :update, :destroy]
+  include ActAsConfig
+
+  before_action :set_evaluation_criterium, only: %i[show edit update destroy]
 
   # GET /evaluation_criteria
   def index
+    @name = 'NAME'
     @evaluation_criteria = EvaluationCriterium.all
   end
 
   # GET /evaluation_criteria/1
-  def show
-  end
+  def show; end
 
   # GET /evaluation_criteria/new
   def new
@@ -16,8 +20,7 @@ class EvaluationCriteriaController < ApplicationController
   end
 
   # GET /evaluation_criteria/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /evaluation_criteria
   def create
@@ -46,13 +49,14 @@ class EvaluationCriteriaController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_evaluation_criterium
-      @evaluation_criterium = EvaluationCriterium.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def evaluation_criterium_params
-      params.fetch(:evaluation_criterium, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_evaluation_criterium
+    @evaluation_criterium = EvaluationCriterium.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def evaluation_criterium_params
+    params.fetch(:evaluation_criterium, {})
+  end
 end
