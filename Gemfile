@@ -9,7 +9,7 @@ gem "sass-rails", "~> 5"
 gem 'jquery-rails'
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rack-canonical-host"
-gem "webpacker", "~> 4.0"
+gem "webpacker", "~> 4.2.2"
 gem "redis", '~> 4.0'
 gem 'bootstrap', '~> 4.3.1'
 

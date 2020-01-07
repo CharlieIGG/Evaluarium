@@ -1,0 +1,62 @@
+$waves_footer_bg_height: 30vh;
+$waves_footer_height: 15vh;
+$waves_offset: calc(#{$waves_footer_height} - #{$waves_footer_bg_height});
+
+.waves-footer-container {
+  position: relative;
+  min-height: $waves_footer_height;
+  width: 100vw;
+}
+
+.waves-footer-content {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  min-height: calc(#{$waves_footer_height} * 1 / 3);
+  display: flex;
+  align-items: flex-end;
+  z-index: 99;
+}
+
+.waves-footer-background {
+  overflow: hidden;
+  width: 100vw;
+  height: calc(#{$waves_footer_height} * 4);
+  background-color: none;
+  background-image: url("../images/bottom_waves3.svg");
+  -svg-mixer-fill: lighten($primary, 5%);
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  position: absolute;
+  bottom: $waves_offset;
+
+  &::before {
+    display: block;
+    content: " ";
+    background-image: url("../images/bottom_waves2.svg");
+    -svg-mixer-fill: $secondary;
+    background-size: 100vw;
+    height: calc(#{$waves_footer_height} * 3.3);
+    width: 100vw;
+    position: absolute;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    bottom: calc(#{$waves_footer_bg_height}/ -2);
+  }
+
+  &::after {
+    display: block;
+    content: " ";
+    background-image: url("../images/bottom_waves1.svg");
+    -svg-mixer-fill: $primary;
+    height: calc(#{$waves_footer_height} * 3.3);
+    width: 100vw;
+    position: absolute;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    bottom: calc(#{$waves_footer_bg_height}/ -1.85);
+  }
+}

@@ -151,10 +151,13 @@ $caret-width: .25em !default;
 // Fonts
 //
 // Font, line-height, and color for body text, headings, and more.
-
+@import url(http://fonts.googleapis.com/css?family=Monoton|Open+Sans:400italic,700italic,400,700);
+$serif: 'Monoton',
+serif;
+$open-sans: 'Open Sans',
+sans-serif;
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Cerebri Sans',
-sans-serif !default;
+$font-family-sans-serif: $open-sans !default;
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
