@@ -10,7 +10,7 @@ RSpec.describe 'Login', type: :system do
         visit new_user_session_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: '12345678'
-        click_on('Log in')
+        click_on('Sign In')
         expect(current_path).to eq root_path
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe 'Login', type: :system do
         visit new_user_session_path
         fill_in 'Email', with: 'non-existent@email.com'
         fill_in 'Password', with: '12345679'
-        click_on('Log in')
+        click_on('Sign In')
         expect(page).to have_content('Log in')
       end
     end

@@ -15,11 +15,17 @@
     <%= yield :stylesheets %>
   </head>
   <body>
-    <%= render 'layouts/navbar' %>
-    <div class="d-flex">
+    <header>
+      <%= render 'layouts/navbar' %>
+    </header>
+    <main class="d-flex">
       <%= render 'layouts/config_sidebar' if @config_section %>
       <%= yield %>
-    </div>
+    </main>
+    <footer class="waves-footer-container">
+      <div class="waves-footer-content"></div>
+      <div class="waves-footer-background"></div>
+    </footer>
     <%= yield :javascripts %>
     <% if Rails.env.production? %>
       <script type="text/javascript">

@@ -2,6 +2,10 @@
   font-size: px-to-rems(12);
   text-transform: uppercase;
 
+  &-secondary {
+    color: $white
+  }
+
   &--cta {
     position: relative;
     padding-bottom: px-to-rems(5);

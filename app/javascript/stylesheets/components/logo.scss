@@ -16,4 +16,14 @@
     background-repeat: no-repeat;
     -svg-mixer-fill: $primary;
   }
+
+  &.logo-white {
+    height: 4rem;
+    width: 4rem;
+    background-image: url("../images/logo1.svg");
+    background-size: 90% 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -svg-mixer-fill: white;
+  }
 }
