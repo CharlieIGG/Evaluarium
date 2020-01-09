@@ -1,5 +1,6 @@
 @import "normalize.css";
 
+@import "./settings/globals";
 @import "./settings/mixins";
 @import "./settings/placeholders";
 @import "./settings/utilities";
@@ -12,6 +13,7 @@
 @import "./components/buttons";
 @import "./components/main_structure";
 @import "./components/form_labels";
+@import "./components/logo";
 @import "./components/popovers";
 @import "./components/text";
 @import "./components/waves_header";

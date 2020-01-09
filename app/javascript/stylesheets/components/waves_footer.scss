@@ -12,51 +12,51 @@ $waves_offset: calc(#{$waves_footer_height} - #{$waves_footer_bg_height});
   position: absolute;
   bottom: 0;
   width: 100vw;
-  min-height: calc(#{$waves_footer_height} * 1 / 3);
+  min-height: $waves_footer_height;
   display: flex;
   align-items: flex-end;
-  z-index: 99;
 }
 
 .waves-footer-background {
   overflow: hidden;
   width: 100vw;
-  height: calc(#{$waves_footer_height} * 4);
-  background-color: none;
-  background-image: url("../images/bottom_waves3.svg");
-  -svg-mixer-fill: lighten($primary, 5%);
-  background-size: 100vw;
+  height: $waves_footer_bg_height;
+  background-image: url("../images/bottom_waves2.svg");
+  -svg-mixer-fill: $primary;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position-y: bottom;
+  background-position-y: top;
+  background-position-x: center;
   position: absolute;
-  bottom: $waves_offset;
+  z-index: -1;
 
   &::before {
     display: block;
     content: " ";
-    background-image: url("../images/bottom_waves2.svg");
+    background-image: url("../images/bottom_waves1.svg");
     -svg-mixer-fill: $secondary;
-    background-size: 100vw;
-    height: calc(#{$waves_footer_height} * 3.3);
+    height: $waves_footer_bg_height;
+    background-size: cover;
     width: 100vw;
     position: absolute;
     background-position-x: center;
-    background-position-y: center;
+    background-position-y: top;
     background-repeat: no-repeat;
-    bottom: calc(#{$waves_footer_bg_height}/ -2);
+    bottom: calc(#{$waves_footer_bg_height}/ -5);
   }
 
   &::after {
     display: block;
     content: " ";
-    background-image: url("../images/bottom_waves1.svg");
-    -svg-mixer-fill: $primary;
-    height: calc(#{$waves_footer_height} * 3.3);
+    background-image: url("../images/bottom_waves3.svg");
+    -svg-mixer-fill: $tertiary;
+    background-size: cover;
+    height: $waves_footer_bg_height;
     width: 100vw;
     position: absolute;
     background-position-x: center;
-    background-position-y: center;
+    background-position-y: top;
     background-repeat: no-repeat;
-    bottom: calc(#{$waves_footer_bg_height}/ -1.85);
+    bottom: calc(#{$waves_footer_bg_height}/ -3);
   }
 }
