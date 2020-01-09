@@ -1,0 +1,62 @@
+$waves_footer_bg_height: 30vh;
+$waves_footer_height: 15vh;
+$waves_offset: calc(#{$waves_footer_height} - #{$waves_footer_bg_height});
+
+.waves-footer-container {
+  position: relative;
+  min-height: $waves_footer_height;
+  width: 100vw;
+}
+
+.waves-footer-content {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  min-height: $waves_footer_height;
+  display: flex;
+  align-items: flex-end;
+}
+
+.waves-footer-background {
+  overflow: hidden;
+  width: 100vw;
+  height: $waves_footer_bg_height;
+  background-image: url("../images/bottom_waves2.svg");
+  -svg-mixer-fill: $primary;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: center;
+  position: absolute;
+  z-index: -1;
+
+  &::before {
+    display: block;
+    content: " ";
+    background-image: url("../images/bottom_waves1.svg");
+    -svg-mixer-fill: $secondary;
+    height: $waves_footer_bg_height;
+    background-size: cover;
+    width: 100vw;
+    position: absolute;
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+    bottom: calc(#{$waves_footer_bg_height}/ -5);
+  }
+
+  &::after {
+    display: block;
+    content: " ";
+    background-image: url("../images/bottom_waves3.svg");
+    -svg-mixer-fill: $tertiary;
+    background-size: cover;
+    height: $waves_footer_bg_height;
+    width: 100vw;
+    position: absolute;
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+    bottom: calc(#{$waves_footer_bg_height}/ -3);
+  }
+}

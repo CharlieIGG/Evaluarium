@@ -10,8 +10,17 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   after_action :verify_authorized, except: :index, unless: :devise_controller?
+  layout :layout_by_resource
 
   private
+
+  def layout_by_resource
+    if devise_controller?
+      'devise'
+    else
+      'application'
+    end
+  end
 
   def user_not_authorized
     redirect_to root_path, alert: 'You are not allowed to access this resource'

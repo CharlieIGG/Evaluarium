@@ -46,8 +46,17 @@ $green: #00D97E !default;
 $teal: #02a8b5 !default; // NOT USED
 $cyan: #39afd1 !default; // NOT USED
 
-$primary: $indigo !default;
-$secondary: $yellow !default;
+// $primary: #FF175F !default;
+// $secondary: #FF9F16 !default;
+// $tertiary:#2F6690;
+
+$primary: #3A86FF !default;
+$secondary: #FF9F16 !default;
+$tertiary:#5A4AE8;
+
+// $primary: $indigo !default;
+// $secondary: $yellow !default;
+// $tertiary: #3AB795;
 $success: $green !default;
 $info: $cyan !default;
 $warning: $yellow !default;
@@ -151,10 +160,11 @@ $caret-width: .25em !default;
 // Fonts
 //
 // Font, line-height, and color for body text, headings, and more.
-
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+$open-sans: 'Open Sans',
+sans-serif;
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Cerebri Sans',
-sans-serif !default;
+$font-family-sans-serif: $open-sans !default;
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
