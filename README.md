@@ -4,6 +4,8 @@
 
 ![](https://github.com/CharlieIGG/evaluarium/workflows/specs/badge.svg)
 
+## ⚠️**WARNING**: This application is still a Work-in-progress!
+
 Evaluating Projects is easy in a lot of cases, but when it comes down to projects where the evaluation
 is rather qualitative, things get messy.
 
@@ -12,9 +14,12 @@ It can be used for voting panels in Hackathons and/or Admission Comittes, or eve
 
 Typical use-cases are Startup Incubators, Accelerators, Hackathons, and other such scenarios where projects get evaluated in any matter that has a degree of "qualitativeness", as opposed to projects that can be very easily normalized and analyzed in a purely numerical manner (e.g. Real Estate development).
 
+**[Check out the live demo!](https://evaluarium.herokuapp.com/users/sign_in)** (You can log-in as an Admin using `admin@example.com` // `123456`, the demo database is cleaned regularly.)
+
 ## Table of contents
 
 - [Evaluarium](#evaluarium)
+  - [⚠️WARNING: This application is still a Work-in-progress!](#%e2%9a%a0%ef%b8%8fwarning-this-application-is-still-a-work-in-progress)
   - [Table of contents](#table-of-contents)
     - [Environment URLS](#environment-urls)
     - [The team](#the-team)
