@@ -1,4 +1,6 @@
-# EVALUARIUM
+![alt text](./app/javascript/images/logo1.svg "Logo Title Text 1")
+
+# Evaluarium
 
 ![](https://github.com/CharlieIGG/evaluarium/workflows/specs/badge.svg)
 
@@ -12,7 +14,7 @@ Typical use-cases are Startup Incubators, Accelerators, Hackathons, and other su
 
 ## Table of contents
 
-- [EVALUARIUM](#evaluarium)
+- [Evaluarium](#evaluarium)
   - [Table of contents](#table-of-contents)
     - [Environment URLS](#environment-urls)
     - [The team](#the-team)
