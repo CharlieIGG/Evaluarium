@@ -28,6 +28,8 @@ module EVALUARIUM
       generator.test_framework :rspec
       generator.view_specs false
       generator.helper_specs false
+      generator.controller_specs false
+      generator.decorator_specs false
       generator.stylesheets false
       generator.javascripts false
       generator.helper false
