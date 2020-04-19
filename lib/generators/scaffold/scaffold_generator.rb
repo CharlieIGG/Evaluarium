@@ -7,6 +7,7 @@ module Rails
     class ScaffoldGenerator
       def run_other_generators
         generate 'policy', class_name
+        add_to_model_translations
       end
 
       private
