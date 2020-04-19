@@ -35,6 +35,7 @@ module EVALUARIUM
       generator.helper false
       generator.request_specs false
       generator.routing_specs false
+      generator.policy :policy
     end
 
     config.i18n.enforce_available_locales = true
