@@ -24,6 +24,7 @@ module EVALUARIUM
   class Application < Rails::Application
     # don't generate RSpec tests for views and helpers
     config.generators do |generator|
+      generator.scaffold_stylesheet false
       generator.test_framework :rspec
       generator.view_specs false
       generator.helper_specs false
