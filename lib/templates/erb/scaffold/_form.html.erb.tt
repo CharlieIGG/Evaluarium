@@ -1,0 +1,37 @@
+<%%= form_with(model: <%= model_resource_name %>.object, local: true) do |form| %>
+<div class="container-fluid px-5">
+  <div class="container-fluid px-5">
+    <%%= render 'shared/common_header', title: <%= model_resource_name %>.new_edit_title,
+    icon_name: "edit-3",
+    cta_button: (
+    form.submit class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap mb-3"
+    )
+    %>
+    <div class="card border-primary mb-3">
+      <div class="card-body">
+        <%% if <%= model_resource_name %>.errors.any? %>
+        <div id="error_explanation">
+          <h2><%%= pluralize(<%= model_resource_name %>.errors.count, "error") %> prohibited this <%= singular_table_name.titleize %> from being saved:</h2>
+          <ul>
+            <%% <%= model_resource_name %>.errors.full_messages.each do |message| %>
+            <li><%%= message %></li>
+            <%% end %>
+          </ul>
+        </div>
+        <%% end %>
+        <% attributes.each do |attribute| -%>
+          <div class="form-group">
+            <%%= form.label :name do %>
+              <%%= <%= model_name %>.human_attribute_name('<%= attribute.column_name %>') %>
+              <%%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.<%= plural_table_name %>.<%= attribute.column_name %>')%>
+              <%% end %>
+              <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control" %>
+            </div>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%% end %>
