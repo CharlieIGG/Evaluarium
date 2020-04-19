@@ -321,10 +321,7 @@ Please take a look at the [heroku.yml file](heroku.yml) to see the instructions 
 
 ## **TO-DO**
 
-If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
-% ./bin/deploy staging
-% ./bin/deploy production
+- [ ] Leverage cache to speed up container set-up time in CI/CD
 
 ## **Contributing**
 
