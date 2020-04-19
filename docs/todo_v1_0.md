@@ -7,7 +7,7 @@
 - [ ] Setup CI/CD
   - [x] Setup CI workflow
   - [ ] Setup Deployment targets
-- [ ] Create basic Docs
+- [x] Create basic Docs
 - [ ] Leverage cache to speed up container set-up time in CI/CD
 - [ ] Can Manage Evaluation Criteria
   - [x] Enable CRUD in the GUI
