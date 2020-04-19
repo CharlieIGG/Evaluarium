@@ -22,7 +22,7 @@
         <% attributes.each do |attribute| -%>
           <div class="form-group">
             <%%= form.label :name do %>
-              <%%= <%= model_name %>.human_attribute_name('<%= attribute.column_name %>') %>
+              <%%= <%= singular_table_name.camelize %>.human_attribute_name('<%= attribute.column_name %>') %>
               <%%= render 'shared/tooltip_icon', icon_name: 'help-circle',
                                             icon_class: 'text-primary',
                                             title: t('helper_texts.<%= plural_table_name %>.<%= attribute.column_name %>')%>

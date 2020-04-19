@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_evaluation_criterium_path(@evaluation_criterium) %> |
-<%= link_to 'Back', evaluation_criteria_path %>
+<p id="notice"><%%= notice %></p>
+<%%= link_to 'Edit', edit_evaluation_criterium_path(@evaluation_criterium) %> |
+<%%= link_to 'Back', evaluation_criteria_path %>

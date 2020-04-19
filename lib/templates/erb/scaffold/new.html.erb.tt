@@ -1,1 +1,1 @@
-<%= render 'form', evaluation_criterium: @evaluation_criterium %>
+<%%= render 'form', <%= model_resource_name %>: @<%= model_resource_name %> %>
