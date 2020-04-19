@@ -12,9 +12,9 @@
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
     <div class="card border-primary mb-3">
       <div class="card-header text-primary font-weight-bold d-flex justify-content-between">
-        <% if orm_instance.respond_to?(:name) %>
+        <% if attributes_names.include?('name') %>
           <%%= <%= singular_table_name %>.name %>
-        <% elsif orm_instance.respond_to?(:title) %>
+        <% elsif attributes_names.include?('title') %>
           <%%= <%= singular_table_name %>.title %>
         <% else %>
           <%= singular_table_name.titleize %>
@@ -23,7 +23,7 @@
       <div class="card-body">
         <% attributes.first(3).each do |attribute| -%>
           <p class="card-text">
-            <%= singular_table_name.camelize %>.human_attribute_name('<%= attribute.column_name %>')
+            <%%= <%= singular_table_name.camelize %>.human_attribute_name('<%= attribute.column_name %>') %>
             <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
           </p>
         <% end -%>
