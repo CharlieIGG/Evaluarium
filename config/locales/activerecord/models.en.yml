@@ -12,3 +12,7 @@ en:
           You can assign any criteria from this catalogue (along with a program-specific weight)
           to any specific Evaluation Program, in order to have every evaluation in that Program
           be made using the selected criteria.
+      project:
+        one: Project
+        other: Projects
+        ui_description: Here you can manage Projects [CHANGE ME AT 'config/locales/activerecord/models']

@@ -1,0 +1,44 @@
+<%= form_with(model: project.object, local: true) do |form| %>
+<div class="container-fluid px-5">
+  <div class="container-fluid px-5">
+    <%= render 'shared/common_header', title: project.new_edit_title,
+    icon_name: "edit-3",
+    cta_button: (
+    form.submit class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap mb-3"
+    )
+    %>
+    <div class="card border-primary mb-3">
+      <div class="card-body">
+        <% if project.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(project.errors.count, "error") %> prohibited this Project from being saved:</h2>
+          <ul>
+            <% project.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+                  <div class="form-group">
+            <%= form.label :name do %>
+              <%= Project.human_attribute_name('name') %>
+              <%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.projects.name')%>
+              <% end %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+                    <div class="form-group">
+            <%= form.label :name do %>
+              <%= Project.human_attribute_name('founded_at') %>
+              <%= render 'shared/tooltip_icon', icon_name: 'help-circle',
+                                            icon_class: 'text-primary',
+                                            title: t('helper_texts.projects.founded_at')%>
+              <% end %>
+              <%= form.date_select :founded_at, class: "form-control" %>
+            </div>
+                  </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
