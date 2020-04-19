@@ -1,0 +1,37 @@
+<div class="container-fluid px-5">
+  <%%= render 'shared/common_header', title: <%= singular_table_name.camelize %>.model_name.human(count: 2),
+  icon_name: "check-circle",
+  explanation: t('activerecord.models.<%= singular_table_name %>.ui_description').html_safe,
+  cta_button: (
+  link_to "New #{<%= singular_table_name.camelize %>.model_name.human}", new_<%= singular_route_name %>_path,
+  class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap"
+  )
+  %>
+  <p id="notice"><%%= notice %></p>
+  <div class="card-columns rspec_<%= plural_table_name.camelize %>_list">
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <div class="card border-primary mb-3">
+      <div class="card-header text-primary font-weight-bold d-flex justify-content-between">
+        <% if attributes_names.include?('name') %>
+          <%%= <%= singular_table_name %>.name %>
+        <% elsif attributes_names.include?('title') %>
+          <%%= <%= singular_table_name %>.title %>
+        <% else %>
+          <%= singular_table_name.titleize %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <% attributes.first(3).each do |attribute| -%>
+          <p class="card-text">
+            <%%= <%= singular_table_name.camelize %>.human_attribute_name('<%= attribute.column_name %>') %>
+            <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+          </p>
+        <% end -%>
+        <div class="text-right">
+          <%%= link_to t('controllers.actions.edit').titleize, edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+    <%% end %>
+  </div>
+</div>
