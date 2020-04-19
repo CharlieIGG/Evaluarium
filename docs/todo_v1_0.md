@@ -9,9 +9,9 @@
   - [ ] Setup Deployment targets
 - [x] Create basic Docs
 - [ ] Leverage cache to speed up container set-up time in CI/CD
-- [ ] Can Manage Evaluation Criteria
+- [x] Can Manage Evaluation Criteria
   - [x] Enable CRUD in the GUI
-  - [ ] Add validation to prevent blank entries
+  - [x] Add validation to prevent blank entries
 - [ ] Can Manage Projects
   - [ ] Enable CRUD in the GUI
 - [ ] Can manage Evaluation Programs
