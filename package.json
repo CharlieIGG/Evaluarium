@@ -11,7 +11,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.4.1",
     "feather-icons": "^4.25.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "normalize.css": "^8.0.1",
     "popper.js": "^1.16.0",
     "postcss-move-props-to-bg-image-query": "^2.0.0",
