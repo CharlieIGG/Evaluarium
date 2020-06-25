@@ -230,7 +230,7 @@ GEM
     puma (3.12.6)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.8)
+    rack (2.2.3)
     rack-canonical-host (0.2.3)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
