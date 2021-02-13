@@ -1,0 +1,1 @@
+<%%= render 'form', <%= model_resource_name %>: @<%= model_resource_name %> %>

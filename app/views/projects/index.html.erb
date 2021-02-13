@@ -1,0 +1,35 @@
+<div class="container-fluid px-5">
+  <%= render 'shared/common_header', title: Project.model_name.human(count: 2),
+  icon_name: "check-circle",
+  explanation: t('activerecord.models.project.ui_description').html_safe,
+  cta_button: (
+  link_to "New #{Project.model_name.human}", new_project_path,
+  class:"sticky-button btn btn-secondary btn-lg py-3 text-nowrap"
+  )
+  %>
+  <p id="notice"><%= notice %></p>
+  <div class="card-columns rspec_Projects_list">
+    <% @projects.each do |project| %>
+    <div class="card border-primary mb-3">
+      <div class="card-header text-primary font-weight-bold d-flex justify-content-between">
+        
+          <%= project.name %>
+        
+      </div>
+      <div class="card-body">
+                  <p class="card-text">
+            <%= Project.human_attribute_name('name') %>
+            <%= project.name %>
+          </p>
+                  <p class="card-text">
+            <%= Project.human_attribute_name('founded_at') %>
+            <%= project.founded_at %>
+          </p>
+                <div class="text-right">
+          <%= link_to t('controllers.actions.edit').titleize, edit_project_path(project), class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -327,5 +327,5 @@ For the sake of readability, each major version's TO-DO list will be put into a 
 
 ## **Contributing**
 
-Feel free to create forks + pull requests for this project with new features and bug-fixes.
+Feel free to create forks + pull requests for this project with new features and bug-fixes. We follow [GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/), so please make sure you follow the corresponding flow, starting new features from the `develop` branch, with the corresponding branch prefix.
 If you're wanting to implement a functionallity that is very specific to your use case or industry, it should be added in a modular way (as an opt-in feature).

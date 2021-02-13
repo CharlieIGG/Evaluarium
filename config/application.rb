@@ -24,14 +24,18 @@ module EVALUARIUM
   class Application < Rails::Application
     # don't generate RSpec tests for views and helpers
     config.generators do |generator|
+      generator.scaffold_stylesheet false
       generator.test_framework :rspec
       generator.view_specs false
       generator.helper_specs false
+      generator.controller_specs false
+      generator.decorator_specs false
       generator.stylesheets false
       generator.javascripts false
       generator.helper false
       generator.request_specs false
       generator.routing_specs false
+      generator.policy :policy
     end
 
     config.i18n.enforce_available_locales = true

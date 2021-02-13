@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :projects
   devise_for :users, controllers: { invitations: 'users/invitations' }
   devise_scope :user do
     authenticated :user, ->(user) { user.has_role?(:superadmin) } do
