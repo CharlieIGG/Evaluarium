@@ -4,7 +4,7 @@ ruby "2.6.3"
 
 gem "rails", "~> 6.0.2"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 3.12"
+gem "puma", "~> 4.3"
 gem "sass-rails", "~> 5"
 gem 'jquery-rails'
 gem "bootsnap", ">= 1.4.2", require: false
