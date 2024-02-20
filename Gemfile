@@ -71,7 +71,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise"
 gem "rolify"
 gem 'pundit', '~> 2.0', '>= 2.0.1'
-gem "devise_invitable", "~> 1.7.0"
+gem "devise_invitable", "~> 2.0.9"
 gem "kaminari"
 gem "mini_magick"
 gem "aws-sdk-s3", "~> 1.9", require: false
